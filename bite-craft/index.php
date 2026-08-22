@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once "config/database.php";
 
 ?>
@@ -53,7 +55,7 @@ require_once "config/database.php";
     <div class="container">
 
 
-        <!-- Logo -->
+        <!-- LOGO -->
 
         <a
             class="navbar-brand fw-bold fs-3"
@@ -67,7 +69,7 @@ require_once "config/database.php";
 
 
 
-        <!-- Mobile Button -->
+        <!-- MOBILE BUTTON -->
 
         <button
             class="navbar-toggler"
@@ -81,7 +83,7 @@ require_once "config/database.php";
 
 
 
-        <!-- Navigation -->
+        <!-- NAVIGATION -->
 
         <div
             class="collapse navbar-collapse"
@@ -89,6 +91,8 @@ require_once "config/database.php";
 
             <ul class="navbar-nav ms-auto align-items-lg-center">
 
+
+                <!-- HOME -->
 
                 <li class="nav-item">
 
@@ -103,6 +107,8 @@ require_once "config/database.php";
                 </li>
 
 
+                <!-- MENU -->
+
                 <li class="nav-item">
 
                     <a
@@ -115,6 +121,8 @@ require_once "config/database.php";
 
                 </li>
 
+
+                <!-- ABOUT -->
 
                 <li class="nav-item">
 
@@ -129,6 +137,8 @@ require_once "config/database.php";
                 </li>
 
 
+                <!-- CONTACT -->
+
                 <li class="nav-item">
 
                     <a
@@ -141,6 +151,34 @@ require_once "config/database.php";
 
                 </li>
 
+
+                <!-- =========================================
+                     MY ORDERS
+                     Only logged-in users can see this
+                ========================================== -->
+
+                <?php if (isset($_SESSION["user_id"])): ?>
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="my-orders.php">
+
+                            <i class="bi bi-receipt"></i>
+
+                            My Orders
+
+                        </a>
+
+                    </li>
+
+                <?php endif; ?>
+
+
+                <!-- =========================================
+                     BOOK A TABLE
+                ========================================== -->
 
                 <li class="nav-item ms-lg-3">
 
@@ -179,7 +217,7 @@ require_once "config/database.php";
         <div class="row align-items-center min-vh-75">
 
 
-            <!-- Hero Text -->
+            <!-- HERO TEXT -->
 
             <div class="col-lg-6">
 
@@ -244,7 +282,7 @@ require_once "config/database.php";
 
 
 
-            <!-- Hero Image Placeholder -->
+            <!-- HERO IMAGE -->
 
             <div class="col-lg-6 text-center mt-5 mt-lg-0">
 
@@ -305,7 +343,7 @@ require_once "config/database.php";
         <div class="row g-4">
 
 
-            <!-- Feature 1 -->
+            <!-- FEATURE 1 -->
 
             <div class="col-md-4">
 
@@ -338,7 +376,7 @@ require_once "config/database.php";
 
 
 
-            <!-- Feature 2 -->
+            <!-- FEATURE 2 -->
 
             <div class="col-md-4">
 
@@ -371,7 +409,7 @@ require_once "config/database.php";
 
 
 
-            <!-- Feature 3 -->
+            <!-- FEATURE 3 -->
 
             <div class="col-md-4">
 
@@ -450,7 +488,7 @@ require_once "config/database.php";
         <div class="row g-4">
 
 
-            <!-- Burger -->
+            <!-- BURGER -->
 
             <div class="col-md-6 col-lg-3">
 
@@ -509,7 +547,7 @@ require_once "config/database.php";
 
 
 
-            <!-- Pasta -->
+            <!-- PASTA -->
 
             <div class="col-md-6 col-lg-3">
 
@@ -568,7 +606,7 @@ require_once "config/database.php";
 
 
 
-            <!-- Pizza -->
+            <!-- PIZZA -->
 
             <div class="col-md-6 col-lg-3">
 
@@ -627,7 +665,7 @@ require_once "config/database.php";
 
 
 
-            <!-- Chicken -->
+            <!-- CHICKEN -->
 
             <div class="col-md-6 col-lg-3">
 
@@ -857,6 +895,8 @@ require_once "config/database.php";
         <div class="row g-4">
 
 
+            <!-- BRAND -->
+
             <div class="col-lg-5">
 
 
@@ -906,6 +946,8 @@ require_once "config/database.php";
 
 
 
+            <!-- QUICK LINKS -->
+
             <div class="col-lg-3">
 
 
@@ -952,9 +994,24 @@ require_once "config/database.php";
                 </a>
 
 
+                <?php if (isset($_SESSION["user_id"])): ?>
+
+                    <a
+                        href="my-orders.php"
+                        class="footer-link">
+
+                        My Orders
+
+                    </a>
+
+                <?php endif; ?>
+
+
             </div>
 
 
+
+            <!-- CONTACT -->
 
             <div class="col-lg-4">
 
