@@ -105,46 +105,81 @@ if ($result) {
     $total_reservations = $row["total"];
 }
 
+
+// ========================================
+// GET TOTAL ORDERS
+// ========================================
+
+$total_orders = 0;
+
+$result = $conn->query(
+    "SELECT COUNT(*) AS total FROM orders"
+);
+
+if ($result) {
+
+    $row = $result->fetch_assoc();
+
+    $total_orders = $row["total"];
+}
+
 ?>
+
 
 
 <!DOCTYPE html>
 
 <html lang="en">
 
+
 <head>
 
     <meta charset="UTF-8">
+
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
+
     <title>Admin Dashboard | BiteCraft</title>
 
 
-    <!-- Bootstrap -->
+
+    <!-- ========================================
+         BOOTSTRAP
+    ========================================= -->
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
 
-    <!-- Bootstrap Icons -->
+
+    <!-- ========================================
+         BOOTSTRAP ICONS
+    ========================================= -->
 
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 
+
     <style>
 
+
         body {
+
             background-color: #f8f9fa;
+
         }
 
 
-        /* Sidebar */
+
+        /* ========================================
+           SIDEBAR
+        ========================================= */
 
         .sidebar {
 
@@ -163,6 +198,7 @@ if ($result) {
             padding-top: 20px;
 
         }
+
 
 
         .sidebar-logo {
@@ -184,11 +220,13 @@ if ($result) {
         }
 
 
+
         .sidebar-logo span {
 
             color: #ffc107;
 
         }
+
 
 
         .sidebar-link {
@@ -206,6 +244,7 @@ if ($result) {
         }
 
 
+
         .sidebar-link:hover {
 
             color: white;
@@ -213,6 +252,7 @@ if ($result) {
             background-color: #343a40;
 
         }
+
 
 
         .sidebar-link.active {
@@ -224,6 +264,7 @@ if ($result) {
         }
 
 
+
         .sidebar-link i {
 
             width: 25px;
@@ -231,7 +272,10 @@ if ($result) {
         }
 
 
-        /* Main */
+
+        /* ========================================
+           MAIN
+        ========================================= */
 
         .main-content {
 
@@ -242,7 +286,10 @@ if ($result) {
         }
 
 
-        /* Topbar */
+
+        /* ========================================
+           TOPBAR
+        ========================================= */
 
         .topbar {
 
@@ -255,7 +302,10 @@ if ($result) {
         }
 
 
-        /* Stat Cards */
+
+        /* ========================================
+           STAT CARDS
+        ========================================= */
 
         .stat-card {
 
@@ -267,11 +317,14 @@ if ($result) {
 
             border: 0;
 
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            box-shadow:
+                0 5px 20px
+                rgba(0, 0, 0, 0.05);
 
             transition: 0.3s;
 
         }
+
 
 
         .stat-card:hover {
@@ -279,6 +332,7 @@ if ($result) {
             transform: translateY(-5px);
 
         }
+
 
 
         .stat-icon {
@@ -304,7 +358,10 @@ if ($result) {
         }
 
 
-        /* Quick Actions */
+
+        /* ========================================
+           QUICK ACTIONS
+        ========================================= */
 
         .action-card {
 
@@ -327,15 +384,19 @@ if ($result) {
         }
 
 
+
         .action-card:hover {
 
             color: #212529;
 
             transform: translateY(-5px);
 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.08);
 
         }
+
 
 
         .action-icon {
@@ -347,7 +408,10 @@ if ($result) {
         }
 
 
-        /* Mobile */
+
+        /* ========================================
+           MOBILE
+        ========================================= */
 
         @media (max-width: 768px) {
 
@@ -356,6 +420,7 @@ if ($result) {
                 width: 70px;
 
             }
+
 
 
             .sidebar-logo {
@@ -369,11 +434,13 @@ if ($result) {
             }
 
 
+
             .sidebar-logo i {
 
                 font-size: 25px;
 
             }
+
 
 
             .sidebar-link {
@@ -385,6 +452,7 @@ if ($result) {
             }
 
 
+
             .sidebar-link span {
 
                 display: none;
@@ -392,11 +460,13 @@ if ($result) {
             }
 
 
+
             .sidebar-link i {
 
                 font-size: 20px;
 
             }
+
 
 
             .main-content {
@@ -407,23 +477,26 @@ if ($result) {
 
         }
 
+
     </style>
 
 </head>
 
 
+
 <body>
 
 
-<!-- ========================================
+
+<!-- ==================================================
      SIDEBAR
-======================================== -->
+================================================== -->
 
 
 <aside class="sidebar">
 
 
-    <!-- Logo -->
+    <!-- LOGO -->
 
     <a
         href="index.php"
@@ -437,7 +510,7 @@ if ($result) {
 
 
 
-    <!-- Dashboard -->
+    <!-- DASHBOARD -->
 
     <a
         href="index.php"
@@ -451,7 +524,7 @@ if ($result) {
 
 
 
-    <!-- Menu -->
+    <!-- MENU -->
 
     <a
         href="menu.php"
@@ -465,7 +538,7 @@ if ($result) {
 
 
 
-    <!-- Add Menu -->
+    <!-- ADD MENU -->
 
     <a
         href="add-menu.php"
@@ -479,7 +552,21 @@ if ($result) {
 
 
 
-    <!-- Reservations -->
+    <!-- ORDERS -->
+
+    <a
+        href="orders.php"
+        class="sidebar-link">
+
+        <i class="bi bi-receipt"></i>
+
+        <span>Orders</span>
+
+    </a>
+
+
+
+    <!-- RESERVATIONS -->
 
     <a
         href="#"
@@ -493,7 +580,7 @@ if ($result) {
 
 
 
-    <!-- Users -->
+    <!-- USERS -->
 
     <a
         href="#"
@@ -511,7 +598,7 @@ if ($result) {
 
 
 
-    <!-- Website -->
+    <!-- WEBSITE -->
 
     <a
         href="../index.php"
@@ -525,7 +612,7 @@ if ($result) {
 
 
 
-    <!-- Logout -->
+    <!-- LOGOUT -->
 
     <a
         href="logout.php"
@@ -542,17 +629,19 @@ if ($result) {
 
 
 
-<!-- ========================================
+<!-- ==================================================
      MAIN CONTENT
-======================================== -->
+================================================== -->
 
 
 <main class="main-content">
 
 
+
     <!-- TOPBAR -->
 
-    <div class="topbar d-flex justify-content-between align-items-center">
+    <div
+        class="topbar d-flex justify-content-between align-items-center">
 
 
         <div>
@@ -569,11 +658,20 @@ if ($result) {
 
         <div>
 
-            <i class="bi bi-person-circle me-2"></i>
+            <i
+                class="bi bi-person-circle me-2">
+            </i>
+
 
             <strong>
 
-                <?php echo htmlspecialchars($admin_name); ?>
+                <?php
+
+                echo htmlspecialchars(
+                    $admin_name
+                );
+
+                ?>
 
             </strong>
 
@@ -584,21 +682,36 @@ if ($result) {
 
 
 
-    <!-- PAGE CONTENT -->
+    <!-- ==================================================
+         PAGE CONTENT
+    ================================================== -->
+
 
     <div class="container-fluid p-4">
 
 
-        <!-- Welcome -->
+
+        <!-- WELCOME -->
 
         <div class="mb-4">
+
 
             <h2 class="fw-bold">
 
                 Welcome back,
-                <?php echo htmlspecialchars($admin_name); ?>! 👋
+
+                <?php
+
+                echo htmlspecialchars(
+                    $admin_name
+                );
+
+                ?>
+
+               ! 👋
 
             </h2>
+
 
             <p class="text-secondary">
 
@@ -606,16 +719,18 @@ if ($result) {
 
             </p>
 
+
         </div>
 
 
 
-        <!-- ====================================
+        <!-- ==================================================
              STAT CARDS
-        ==================================== -->
+        ================================================== -->
 
 
         <div class="row g-4 mb-5">
+
 
 
             <!-- USERS -->
@@ -626,21 +741,28 @@ if ($result) {
                 <div class="stat-card">
 
 
-                    <div class="d-flex justify-content-between">
+                    <div
+                        class="d-flex justify-content-between">
 
 
                         <div>
 
-                            <p class="text-secondary mb-1">
+                            <p
+                                class="text-secondary mb-1">
 
                                 Total Users
 
                             </p>
 
 
-                            <h2 class="fw-bold mb-0">
+                            <h2
+                                class="fw-bold mb-0">
 
-                                <?php echo $total_users; ?>
+                                <?php
+
+                                echo $total_users;
+
+                                ?>
 
                             </h2>
 
@@ -649,7 +771,9 @@ if ($result) {
 
                         <div class="stat-icon">
 
-                            <i class="bi bi-people"></i>
+                            <i
+                                class="bi bi-people">
+                            </i>
 
                         </div>
 
@@ -672,21 +796,28 @@ if ($result) {
                 <div class="stat-card">
 
 
-                    <div class="d-flex justify-content-between">
+                    <div
+                        class="d-flex justify-content-between">
 
 
                         <div>
 
-                            <p class="text-secondary mb-1">
+                            <p
+                                class="text-secondary mb-1">
 
                                 Menu Items
 
                             </p>
 
 
-                            <h2 class="fw-bold mb-0">
+                            <h2
+                                class="fw-bold mb-0">
 
-                                <?php echo $total_menu; ?>
+                                <?php
+
+                                echo $total_menu;
+
+                                ?>
 
                             </h2>
 
@@ -695,7 +826,9 @@ if ($result) {
 
                         <div class="stat-icon">
 
-                            <i class="bi bi-egg-fried"></i>
+                            <i
+                                class="bi bi-egg-fried">
+                            </i>
 
                         </div>
 
@@ -718,21 +851,28 @@ if ($result) {
                 <div class="stat-card">
 
 
-                    <div class="d-flex justify-content-between">
+                    <div
+                        class="d-flex justify-content-between">
 
 
                         <div>
 
-                            <p class="text-secondary mb-1">
+                            <p
+                                class="text-secondary mb-1">
 
                                 Categories
 
                             </p>
 
 
-                            <h2 class="fw-bold mb-0">
+                            <h2
+                                class="fw-bold mb-0">
 
-                                <?php echo $total_categories; ?>
+                                <?php
+
+                                echo $total_categories;
+
+                                ?>
 
                             </h2>
 
@@ -741,7 +881,9 @@ if ($result) {
 
                         <div class="stat-icon">
 
-                            <i class="bi bi-grid"></i>
+                            <i
+                                class="bi bi-grid">
+                            </i>
 
                         </div>
 
@@ -756,7 +898,7 @@ if ($result) {
 
 
 
-            <!-- RESERVATIONS -->
+            <!-- ORDERS -->
 
             <div class="col-sm-6 col-xl-3">
 
@@ -764,21 +906,28 @@ if ($result) {
                 <div class="stat-card">
 
 
-                    <div class="d-flex justify-content-between">
+                    <div
+                        class="d-flex justify-content-between">
 
 
                         <div>
 
-                            <p class="text-secondary mb-1">
+                            <p
+                                class="text-secondary mb-1">
 
-                                Reservations
+                                Total Orders
 
                             </p>
 
 
-                            <h2 class="fw-bold mb-0">
+                            <h2
+                                class="fw-bold mb-0">
 
-                                <?php echo $total_reservations; ?>
+                                <?php
+
+                                echo $total_orders;
+
+                                ?>
 
                             </h2>
 
@@ -787,10 +936,70 @@ if ($result) {
 
                         <div class="stat-icon">
 
-                            <i class="bi bi-calendar-check"></i>
+                            <i
+                                class="bi bi-receipt">
+                            </i>
 
                         </div>
 
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+        <!-- ==================================================
+             RESERVATIONS
+        ================================================== -->
+
+
+        <div class="mb-5">
+
+
+            <div class="stat-card">
+
+
+                <div
+                    class="d-flex justify-content-between align-items-center">
+
+
+                    <div>
+
+                        <p
+                            class="text-secondary mb-1">
+
+                            Total Reservations
+
+                        </p>
+
+
+                        <h2 class="fw-bold mb-0">
+
+                            <?php
+
+                            echo $total_reservations;
+
+                            ?>
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="stat-icon">
+
+                        <i
+                            class="bi bi-calendar-check">
+                        </i>
 
                     </div>
 
@@ -805,9 +1014,9 @@ if ($result) {
 
 
 
-        <!-- ====================================
+        <!-- ==================================================
              QUICK ACTIONS
-        ==================================== -->
+        ================================================== -->
 
 
         <h4 class="fw-bold mb-3">
@@ -817,12 +1026,14 @@ if ($result) {
         </h4>
 
 
+
         <div class="row g-4">
 
 
-            <!-- Add Menu -->
 
-            <div class="col-md-4">
+            <!-- ADD MENU -->
+
+            <div class="col-md-6 col-xl-3">
 
 
                 <a
@@ -835,14 +1046,16 @@ if ($result) {
                     </i>
 
 
-                    <h5 class="fw-bold mt-3">
+                    <h5
+                        class="fw-bold mt-3">
 
                         Add Menu Item
 
                     </h5>
 
 
-                    <p class="text-secondary mb-0">
+                    <p
+                        class="text-secondary mb-0">
 
                         Add a new food item to your restaurant menu.
 
@@ -856,9 +1069,9 @@ if ($result) {
 
 
 
-            <!-- Manage Menu -->
+            <!-- MANAGE MENU -->
 
-            <div class="col-md-4">
+            <div class="col-md-6 col-xl-3">
 
 
                 <a
@@ -871,14 +1084,16 @@ if ($result) {
                     </i>
 
 
-                    <h5 class="fw-bold mt-3">
+                    <h5
+                        class="fw-bold mt-3">
 
                         Manage Menu
 
                     </h5>
 
 
-                    <p class="text-secondary mb-0">
+                    <p
+                        class="text-secondary mb-0">
 
                         View, edit and delete menu items.
 
@@ -892,9 +1107,47 @@ if ($result) {
 
 
 
-            <!-- Website -->
+            <!-- ORDERS -->
 
-            <div class="col-md-4">
+            <div class="col-md-6 col-xl-3">
+
+
+                <a
+                    href="orders.php"
+                    class="action-card">
+
+
+                    <i
+                        class="bi bi-receipt action-icon">
+                    </i>
+
+
+                    <h5
+                        class="fw-bold mt-3">
+
+                        Manage Orders
+
+                    </h5>
+
+
+                    <p
+                        class="text-secondary mb-0">
+
+                        View and manage customer orders.
+
+                    </p>
+
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- WEBSITE -->
+
+            <div class="col-md-6 col-xl-3">
 
 
                 <a
@@ -907,14 +1160,16 @@ if ($result) {
                     </i>
 
 
-                    <h5 class="fw-bold mt-3">
+                    <h5
+                        class="fw-bold mt-3">
 
                         View Website
 
                     </h5>
 
 
-                    <p class="text-secondary mb-0">
+                    <p
+                        class="text-secondary mb-0">
 
                         Open the customer-facing restaurant website.
 
@@ -925,6 +1180,7 @@ if ($result) {
 
 
             </div>
+
 
 
         </div>
