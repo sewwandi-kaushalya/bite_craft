@@ -569,7 +569,7 @@ if ($result) {
     <!-- RESERVATIONS -->
 
     <a
-        href="#"
+        href="reservations.php"
         class="sidebar-link">
 
         <i class="bi bi-calendar-check"></i>

@@ -76,116 +76,134 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
             // ========================================
-            // CHECK ALREADY BOOKED TIME
+            // CHECK TIME
             // ========================================
 
-            $check = $conn->prepare(
-                "SELECT id
-                 FROM reservations
-                 WHERE reservation_date = ?
-                 AND reservation_time = ?
-                 AND status IN ('pending', 'confirmed')
-                 LIMIT 1"
-            );
+            if (
+                $reservation_time < "10:00" ||
+                $reservation_time > "22:00"
+            ) {
 
-            $check->bind_param(
-                "ss",
-                $reservation_date,
-                $reservation_time
-            );
-
-            $check->execute();
-
-            $check_result = $check->get_result();
-
-
-            if ($check_result->num_rows > 0) {
-
-                $error =
-                    "Sorry, this time slot is already reserved. Please choose another time.";
-
-                $check->close();
+                $error = "Please select a time between 10:00 AM and 10:00 PM.";
 
             } else {
 
-                $check->close();
-
 
                 // ========================================
-                // GET USER ID
+                // CHECK ALREADY BOOKED TIME
                 // ========================================
 
-                $user_id = null;
-
-                if (isset($_SESSION["user_id"])) {
-
-                    $user_id = (int) $_SESSION["user_id"];
-
-                }
-
-
-                // ========================================
-                // INSERT RESERVATION
-                // ========================================
-
-                $stmt = $conn->prepare(
-                    "INSERT INTO reservations
-                    (
-                        user_id,
-                        customer_name,
-                        phone,
-                        email,
-                        reservation_date,
-                        reservation_time,
-                        guests,
-                        special_request,
-                        status
-                    )
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending')"
+                $check = $conn->prepare(
+                    "SELECT id
+                     FROM reservations
+                     WHERE reservation_date = ?
+                     AND reservation_time = ?
+                     AND status IN ('pending', 'confirmed')
+                     LIMIT 1"
                 );
 
 
-                $stmt->bind_param(
-                    "isssssis",
-                    $user_id,
-                    $customer_name,
-                    $phone,
-                    $email,
+                $check->bind_param(
+                    "ss",
                     $reservation_date,
-                    $reservation_time,
-                    $guests,
-                    $special_request
+                    $reservation_time
                 );
 
 
-                if ($stmt->execute()) {
-
-                    $reservation_id =
-                        $stmt->insert_id;
-
-                    $stmt->close();
+                $check->execute();
 
 
-                    // ========================================
-                    // SAVE RESERVATION ID
-                    // ========================================
-
-                    $_SESSION["last_reservation_id"] =
-                        $reservation_id;
+                $check_result =
+                    $check->get_result();
 
 
-                    header(
-                        "Location: reservation-success.php"
-                    );
+                if ($check_result->num_rows > 0) {
 
-                    exit;
+                    $error =
+                        "Sorry, this time slot is already reserved. Please choose another time.";
+
+                    $check->close();
 
                 } else {
 
-                    $error =
-                        "Something went wrong. Please try again.";
+                    $check->close();
 
-                    $stmt->close();
+
+                    // ========================================
+                    // INSERT RESERVATION
+                    // DATABASE COLUMNS:
+                    // name
+                    // email
+                    // phone
+                    // guests
+                    // reservation_date
+                    // reservation_time
+                    // special_request
+                    // status
+                    // ========================================
+
+                    $stmt = $conn->prepare(
+                        "INSERT INTO reservations
+                        (
+                            name,
+                            email,
+                            phone,
+                            guests,
+                            reservation_date,
+                            reservation_time,
+                            special_request,
+                            status
+                        )
+                        VALUES (?, ?, ?, ?, ?, ?, ?, 'pending')"
+                    );
+
+
+                    $stmt->bind_param(
+                        "sssisss",
+                        $customer_name,
+                        $email,
+                        $phone,
+                        $guests,
+                        $reservation_date,
+                        $reservation_time,
+                        $special_request
+                    );
+
+
+                    if ($stmt->execute()) {
+
+                        $reservation_id =
+                            $stmt->insert_id;
+
+
+                        $stmt->close();
+
+
+                        // ========================================
+                        // SAVE RESERVATION ID
+                        // ========================================
+
+                        $_SESSION["last_reservation_id"] =
+                            $reservation_id;
+
+
+                        // ========================================
+                        // REDIRECT SUCCESS PAGE
+                        // ========================================
+
+                        header(
+                            "Location: reservation-success.php"
+                        );
+
+                        exit;
+
+                    } else {
+
+                        $error =
+                            "Something went wrong. Please try again.";
+
+                        $stmt->close();
+                    }
                 }
             }
         }
@@ -387,9 +405,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </i>
 
             Bite<span class="text-warning">
-
                 Craft
-
             </span>
 
         </a>
@@ -427,13 +443,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </nav>
 
 
-
 <!-- ========================================
      RESERVATION SECTION
 ======================================== -->
 
 <section class="reservation-section">
-
 
     <div class="container">
 
@@ -467,7 +481,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
 
 
-
         <div class="row g-4 justify-content-center">
 
 
@@ -477,11 +490,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <div class="col-lg-4">
 
-
                 <div class="info-card p-4">
 
 
-                    <div class="reservation-icon mb-4">
+                    <div
+                        class="reservation-icon mb-4">
 
                         <i
                             class="bi bi-calendar-heart">
@@ -490,21 +503,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
 
 
-                    <h3 class="fw-bold text-center mb-4">
+                    <h3
+                        class="fw-bold text-center mb-4">
 
                         Dining at BiteCraft
 
                     </h3>
 
 
-                    <p class="text-light-emphasis mb-4">
+                    <p
+                        class="text-light-emphasis mb-4">
 
                         Reserve your table in advance
                         and enjoy delicious food with
                         your friends and family.
 
                     </p>
-
 
 
                     <!-- OPENING HOURS -->
@@ -518,9 +532,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <div>
 
                             <strong>
-
                                 Opening Hours
-
                             </strong>
 
                             <p
@@ -539,7 +551,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
 
 
-
                     <!-- LOCATION -->
 
                     <div class="info-item">
@@ -551,9 +562,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <div>
 
                             <strong>
-
                                 Location
-
                             </strong>
 
                             <p
@@ -568,7 +577,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
 
 
-
                     <!-- PHONE -->
 
                     <div class="info-item">
@@ -580,9 +588,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <div>
 
                             <strong>
-
                                 Phone
-
                             </strong>
 
                             <p
@@ -597,10 +603,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
 
 
-
                     <!-- EMAIL -->
 
-                    <div class="info-item mb-0">
+                    <div
+                        class="info-item mb-0">
 
                         <i
                             class="bi bi-envelope">
@@ -609,9 +615,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <div>
 
                             <strong>
-
                                 Email
-
                             </strong>
 
                             <p
@@ -631,18 +635,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
 
-
             <!-- ====================================
                  RESERVATION FORM
             ===================================== -->
 
             <div class="col-lg-7">
 
+                <div
+                    class="card reservation-card p-4 p-md-5">
 
-                <div class="card reservation-card p-4 p-md-5">
 
-
-                    <div class="d-flex align-items-center mb-4">
+                    <div
+                        class="d-flex align-items-center mb-4">
 
                         <i
                             class="bi bi-calendar-check text-warning fs-2 me-3">
@@ -650,7 +654,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                         <div>
 
-                            <h3 class="fw-bold mb-0">
+                            <h3
+                                class="fw-bold mb-0">
 
                                 Book a Table
 
@@ -666,7 +671,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
 
                     </div>
-
 
 
                     <!-- ERROR -->
@@ -693,7 +697,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <?php endif; ?>
 
 
-
                     <!-- FORM -->
 
                     <form
@@ -712,9 +715,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     class="form-label fw-semibold">
 
                                     Customer Name
-                                    <span class="text-danger">*</span>
+
+                                    <span
+                                        class="text-danger">
+
+                                        *
+
+                                    </span>
 
                                 </label>
+
 
                                 <input
                                     type="text"
@@ -722,16 +732,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     class="form-control"
                                     placeholder="Enter your name"
                                     value="<?php
-                                        echo htmlspecialchars(
-                                            $_POST[
-                                                "customer_name"
-                                            ] ?? ""
-                                        );
+
+                                    echo htmlspecialchars(
+                                        $_POST[
+                                            "customer_name"
+                                        ] ?? ""
+                                    );
+
                                     ?>"
                                     required>
 
                             </div>
-
 
 
                             <!-- PHONE -->
@@ -742,9 +753,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     class="form-label fw-semibold">
 
                                     Phone Number
-                                    <span class="text-danger">*</span>
+
+                                    <span
+                                        class="text-danger">
+
+                                        *
+
+                                    </span>
 
                                 </label>
+
 
                                 <input
                                     type="text"
@@ -752,16 +770,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     class="form-control"
                                     placeholder="+94 77 123 4567"
                                     value="<?php
-                                        echo htmlspecialchars(
-                                            $_POST[
-                                                "phone"
-                                            ] ?? ""
-                                        );
+
+                                    echo htmlspecialchars(
+                                        $_POST[
+                                            "phone"
+                                        ] ?? ""
+                                    );
+
                                     ?>"
                                     required>
 
                             </div>
-
 
 
                             <!-- EMAIL -->
@@ -775,21 +794,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                                 </label>
 
+
                                 <input
                                     type="email"
                                     name="email"
                                     class="form-control"
                                     placeholder="your@email.com"
                                     value="<?php
-                                        echo htmlspecialchars(
-                                            $_POST[
-                                                "email"
-                                            ] ?? ""
-                                        );
+
+                                    echo htmlspecialchars(
+                                        $_POST[
+                                            "email"
+                                        ] ?? ""
+                                    );
+
                                     ?>">
 
                             </div>
-
 
 
                             <!-- DATE -->
@@ -800,9 +821,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     class="form-label fw-semibold">
 
                                     Reservation Date
-                                    <span class="text-danger">*</span>
+
+                                    <span
+                                        class="text-danger">
+
+                                        *
+
+                                    </span>
 
                                 </label>
+
 
                                 <input
                                     type="date"
@@ -812,16 +840,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                         echo date("Y-m-d");
                                     ?>"
                                     value="<?php
-                                        echo htmlspecialchars(
-                                            $_POST[
-                                                "reservation_date"
-                                            ] ?? ""
-                                        );
+
+                                    echo htmlspecialchars(
+                                        $_POST[
+                                            "reservation_date"
+                                        ] ?? ""
+                                    );
+
                                     ?>"
                                     required>
 
                             </div>
-
 
 
                             <!-- TIME -->
@@ -832,9 +861,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     class="form-label fw-semibold">
 
                                     Reservation Time
-                                    <span class="text-danger">*</span>
+
+                                    <span
+                                        class="text-danger">
+
+                                        *
+
+                                    </span>
 
                                 </label>
+
 
                                 <input
                                     type="time"
@@ -843,16 +879,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     min="10:00"
                                     max="22:00"
                                     value="<?php
-                                        echo htmlspecialchars(
-                                            $_POST[
-                                                "reservation_time"
-                                            ] ?? ""
-                                        );
+
+                                    echo htmlspecialchars(
+                                        $_POST[
+                                            "reservation_time"
+                                        ] ?? ""
+                                    );
+
                                     ?>"
                                     required>
 
                             </div>
-
 
 
                             <!-- GUESTS -->
@@ -863,9 +900,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     class="form-label fw-semibold">
 
                                     Number of Guests
-                                    <span class="text-danger">*</span>
+
+                                    <span
+                                        class="text-danger">
+
+                                        *
+
+                                    </span>
 
                                 </label>
+
 
                                 <select
                                     name="guests"
@@ -878,6 +922,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                                     </option>
 
+
                                     <?php for (
                                         $i = 1;
                                         $i <= 20;
@@ -885,7 +930,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     ): ?>
 
                                         <option
-                                            value="<?php echo $i; ?>"
+                                            value="<?php
+                                                echo $i;
+                                            ?>"
                                             <?php
 
                                             echo (
@@ -904,7 +951,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                                             ?>>
 
-                                            <?php echo $i; ?>
+                                            <?php
+                                            echo $i;
+                                            ?>
 
                                             <?php
                                             echo $i === 1
@@ -921,7 +970,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </div>
 
 
-
                             <!-- SPECIAL REQUEST -->
 
                             <div class="col-12">
@@ -932,6 +980,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     Special Request
 
                                 </label>
+
 
                                 <textarea
                                     name="special_request"
@@ -950,7 +999,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </div>
 
 
-
                             <!-- NOTE -->
 
                             <div class="col-12">
@@ -963,7 +1011,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     </i>
 
                                     Your reservation will be
-                                    <strong>Pending</strong>
+
+                                    <strong>
+                                        Pending
+                                    </strong>
+
                                     until it is confirmed by
                                     BiteCraft.
 
@@ -972,10 +1024,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </div>
 
 
-
                             <!-- BUTTON -->
 
-                            <div class="col-12 mt-4">
+                            <div
+                                class="col-12 mt-4">
 
                                 <button
                                     type="submit"
@@ -1009,7 +1061,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </section>
 
 
-
 <!-- ========================================
      FOOTER
 ======================================== -->
@@ -1017,9 +1068,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <footer
     class="bg-dark text-white py-4">
 
-
     <div class="container">
-
 
         <div
             class="d-flex justify-content-between align-items-center flex-wrap gap-3">
@@ -1032,9 +1081,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </i>
 
                 <strong>
-
                     BiteCraft
-
                 </strong>
 
             </div>
@@ -1054,7 +1101,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </div>
 
 </footer>
-
 
 
 <!-- Bootstrap JS -->
