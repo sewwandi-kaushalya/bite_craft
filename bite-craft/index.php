@@ -17,37 +17,30 @@ require_once "config/database.php";
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Bite Craft | Restaurant</title>
-
+    <title>BiteCraft | Restaurant</title>
 
     <!-- Bootstrap CSS -->
-
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
-
     <!-- Bootstrap Icons -->
-
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-
     <!-- Custom CSS -->
-
     <link
         rel="stylesheet"
         href="assets/css/style.css">
 
 </head>
 
-
 <body>
 
 
 <!-- ==================================================
-     NAVBAR
+NAVBAR
 ================================================== -->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
@@ -68,7 +61,6 @@ require_once "config/database.php";
         </a>
 
 
-
         <!-- MOBILE BUTTON -->
 
         <button
@@ -80,7 +72,6 @@ require_once "config/database.php";
             <span class="navbar-toggler-icon"></span>
 
         </button>
-
 
 
         <!-- NAVIGATION -->
@@ -152,12 +143,14 @@ require_once "config/database.php";
                 </li>
 
 
-                <!-- =========================================
-                     MY ORDERS
-                     Only logged-in users can see this
-                ========================================== -->
+                <!-- ==================================================
+                     LOGGED-IN USER
+                ================================================== -->
 
                 <?php if (isset($_SESSION["user_id"])): ?>
+
+
+                    <!-- MY ORDERS -->
 
                     <li class="nav-item">
 
@@ -173,14 +166,120 @@ require_once "config/database.php";
 
                     </li>
 
+
+                    <!-- ADMIN DASHBOARD -->
+
+                    <?php if (
+                        isset($_SESSION["user_role"]) &&
+                        $_SESSION["user_role"] === "admin"
+                    ): ?>
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link text-danger fw-semibold"
+                                href="admin/index.php">
+
+                                <i class="bi bi-speedometer2"></i>
+
+                                Admin Dashboard
+
+                            </a>
+
+                        </li>
+
+                    <?php endif; ?>
+
+
+                    <!-- USER NAME -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <span
+                            class="nav-link">
+
+                            <i class="bi bi-person-circle"></i>
+
+                            <?php
+
+                            echo htmlspecialchars(
+                                $_SESSION["user_name"] ?? "User"
+                            );
+
+                            ?>
+
+                        </span>
+
+                    </li>
+
+
+                    <!-- LOGOUT -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            href="logout.php"
+                            class="btn btn-outline-dark px-3">
+
+                            <i class="bi bi-box-arrow-right"></i>
+
+                            Logout
+
+                        </a>
+
+                    </li>
+
+
+                <?php else: ?>
+
+
+                    <!-- ==================================================
+                         GUEST USER
+                    ================================================== -->
+
+
+                    <!-- LOGIN -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            href="login.php"
+                            class="btn btn-outline-dark px-3">
+
+                            <i class="bi bi-box-arrow-in-right"></i>
+
+                            Login
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- REGISTER -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            href="register.php"
+                            class="btn btn-dark px-3">
+
+                            <i class="bi bi-person-plus"></i>
+
+                            Register
+
+                        </a>
+
+                    </li>
+
+
                 <?php endif; ?>
 
 
-                <!-- =========================================
+                <!-- ==================================================
                      BOOK A TABLE
-                ========================================== -->
+                ================================================== -->
 
-                <li class="nav-item ms-lg-3">
+                <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
 
                     <a
                         href="reservation.php"
@@ -204,13 +303,11 @@ require_once "config/database.php";
 </nav>
 
 
-
 <!-- ==================================================
-     HERO SECTION
+HERO SECTION
 ================================================== -->
 
 <section class="hero-section">
-
 
     <div class="container">
 
@@ -221,8 +318,8 @@ require_once "config/database.php";
 
             <div class="col-lg-6">
 
-
-                <span class="badge bg-warning text-dark px-3 py-2 mb-3">
+                <span
+                    class="badge bg-warning text-dark px-3 py-2 mb-3">
 
                     <i class="bi bi-stars"></i>
 
@@ -277,9 +374,7 @@ require_once "config/database.php";
 
                 </div>
 
-
             </div>
-
 
 
             <!-- HERO IMAGE -->
@@ -294,22 +389,18 @@ require_once "config/database.php";
 
             </div>
 
-
         </div>
 
     </div>
 
-
 </section>
 
 
-
 <!-- ==================================================
-     WHY CHOOSE US
+WHY CHOOSE US
 ================================================== -->
 
 <section class="py-5">
-
 
     <div class="container">
 
@@ -322,13 +413,11 @@ require_once "config/database.php";
 
             </span>
 
-
             <h2 class="fw-bold display-6">
 
                 Why Choose Us?
 
             </h2>
-
 
             <p class="text-secondary">
 
@@ -337,7 +426,6 @@ require_once "config/database.php";
             </p>
 
         </div>
-
 
 
         <div class="row g-4">
@@ -355,13 +443,11 @@ require_once "config/database.php";
 
                     </div>
 
-
                     <h4 class="fw-bold mt-3">
 
                         Quality Food
 
                     </h4>
-
 
                     <p class="text-secondary">
 
@@ -373,7 +459,6 @@ require_once "config/database.php";
                 </div>
 
             </div>
-
 
 
             <!-- FEATURE 2 -->
@@ -388,13 +473,11 @@ require_once "config/database.php";
 
                     </div>
 
-
                     <h4 class="fw-bold mt-3">
 
                         Made With Love
 
                     </h4>
-
 
                     <p class="text-secondary">
 
@@ -406,7 +489,6 @@ require_once "config/database.php";
                 </div>
 
             </div>
-
 
 
             <!-- FEATURE 3 -->
@@ -421,13 +503,11 @@ require_once "config/database.php";
 
                     </div>
 
-
                     <h4 class="fw-bold mt-3">
 
                         Fast Service
 
                     </h4>
-
 
                     <p class="text-secondary">
 
@@ -448,13 +528,11 @@ require_once "config/database.php";
 </section>
 
 
-
 <!-- ==================================================
-     POPULAR DISHES
+POPULAR DISHES
 ================================================== -->
 
 <section class="py-5 bg-light">
-
 
     <div class="container">
 
@@ -467,13 +545,11 @@ require_once "config/database.php";
 
             </span>
 
-
             <h2 class="fw-bold display-6">
 
                 Popular Dishes
 
             </h2>
-
 
             <p class="text-secondary">
 
@@ -482,7 +558,6 @@ require_once "config/database.php";
             </p>
 
         </div>
-
 
 
         <div class="row g-4">
@@ -494,23 +569,19 @@ require_once "config/database.php";
 
                 <div class="card food-card border-0 shadow-sm h-100">
 
-
                     <div class="food-image">
 
                         <i class="bi bi-egg-fried"></i>
 
                     </div>
 
-
                     <div class="card-body">
-
 
                         <h5 class="fw-bold">
 
                             Chicken Burger
 
                         </h5>
-
 
                         <p class="text-secondary small">
 
@@ -519,9 +590,8 @@ require_once "config/database.php";
 
                         </p>
 
-
-                        <div class="d-flex justify-content-between align-items-center">
-
+                        <div
+                            class="d-flex justify-content-between align-items-center">
 
                             <span class="fw-bold text-warning">
 
@@ -529,13 +599,11 @@ require_once "config/database.php";
 
                             </span>
 
-
                             <span>
 
                                 ⭐ 4.8
 
                             </span>
-
 
                         </div>
 
@@ -544,7 +612,6 @@ require_once "config/database.php";
                 </div>
 
             </div>
-
 
 
             <!-- PASTA -->
@@ -553,23 +620,19 @@ require_once "config/database.php";
 
                 <div class="card food-card border-0 shadow-sm h-100">
 
-
                     <div class="food-image">
 
                         <i class="bi bi-cup-hot"></i>
 
                     </div>
 
-
                     <div class="card-body">
-
 
                         <h5 class="fw-bold">
 
                             Creamy Pasta
 
                         </h5>
-
 
                         <p class="text-secondary small">
 
@@ -578,9 +641,8 @@ require_once "config/database.php";
 
                         </p>
 
-
-                        <div class="d-flex justify-content-between align-items-center">
-
+                        <div
+                            class="d-flex justify-content-between align-items-center">
 
                             <span class="fw-bold text-warning">
 
@@ -588,13 +650,11 @@ require_once "config/database.php";
 
                             </span>
 
-
                             <span>
 
                                 ⭐ 4.9
 
                             </span>
-
 
                         </div>
 
@@ -603,7 +663,6 @@ require_once "config/database.php";
                 </div>
 
             </div>
-
 
 
             <!-- PIZZA -->
@@ -612,23 +671,19 @@ require_once "config/database.php";
 
                 <div class="card food-card border-0 shadow-sm h-100">
 
-
                     <div class="food-image">
 
                         <i class="bi bi-circle-fill"></i>
 
                     </div>
 
-
                     <div class="card-body">
-
 
                         <h5 class="fw-bold">
 
                             Cheese Pizza
 
                         </h5>
-
 
                         <p class="text-secondary small">
 
@@ -637,9 +692,8 @@ require_once "config/database.php";
 
                         </p>
 
-
-                        <div class="d-flex justify-content-between align-items-center">
-
+                        <div
+                            class="d-flex justify-content-between align-items-center">
 
                             <span class="fw-bold text-warning">
 
@@ -647,13 +701,11 @@ require_once "config/database.php";
 
                             </span>
 
-
                             <span>
 
                                 ⭐ 4.7
 
                             </span>
-
 
                         </div>
 
@@ -664,13 +716,11 @@ require_once "config/database.php";
             </div>
 
 
-
             <!-- CHICKEN -->
 
             <div class="col-md-6 col-lg-3">
 
                 <div class="card food-card border-0 shadow-sm h-100">
-
 
                     <div class="food-image">
 
@@ -678,16 +728,13 @@ require_once "config/database.php";
 
                     </div>
 
-
                     <div class="card-body">
-
 
                         <h5 class="fw-bold">
 
                             Grilled Chicken
 
                         </h5>
-
 
                         <p class="text-secondary small">
 
@@ -696,9 +743,8 @@ require_once "config/database.php";
 
                         </p>
 
-
-                        <div class="d-flex justify-content-between align-items-center">
-
+                        <div
+                            class="d-flex justify-content-between align-items-center">
 
                             <span class="fw-bold text-warning">
 
@@ -706,13 +752,11 @@ require_once "config/database.php";
 
                             </span>
 
-
                             <span>
 
                                 ⭐ 4.9
 
                             </span>
-
 
                         </div>
 
@@ -724,7 +768,6 @@ require_once "config/database.php";
 
 
         </div>
-
 
 
         <div class="text-center mt-5">
@@ -741,28 +784,23 @@ require_once "config/database.php";
 
         </div>
 
-
     </div>
 
 </section>
 
 
-
 <!-- ==================================================
-     ABOUT SECTION
+ABOUT SECTION
 ================================================== -->
 
 <section class="py-5">
 
-
     <div class="container">
-
 
         <div class="row align-items-center g-5">
 
 
             <div class="col-lg-6">
-
 
                 <div class="about-image">
 
@@ -773,16 +811,13 @@ require_once "config/database.php";
             </div>
 
 
-
             <div class="col-lg-6">
-
 
                 <span class="text-warning fw-bold">
 
                     ABOUT US
 
                 </span>
-
 
                 <h2 class="display-6 fw-bold mt-2">
 
@@ -791,14 +826,12 @@ require_once "config/database.php";
 
                 </h2>
 
-
                 <p class="text-secondary mt-3">
 
                     At BiteCraft, we believe great food
                     creates great memories.
 
                 </p>
-
 
                 <p class="text-secondary">
 
@@ -808,7 +841,6 @@ require_once "config/database.php";
                     dining experience.
 
                 </p>
-
 
                 <a
                     href="about.php"
@@ -820,9 +852,7 @@ require_once "config/database.php";
 
                 </a>
 
-
             </div>
-
 
         </div>
 
@@ -831,22 +861,17 @@ require_once "config/database.php";
 </section>
 
 
-
 <!-- ==================================================
-     RESERVATION CTA
+RESERVATION CTA
 ================================================== -->
 
 <section class="reservation-section py-5">
 
-
     <div class="container">
-
 
         <div class="reservation-box text-center p-5">
 
-
             <i class="bi bi-calendar-heart display-4"></i>
-
 
             <h2 class="fw-bold mt-3">
 
@@ -854,14 +879,12 @@ require_once "config/database.php";
 
             </h2>
 
-
             <p class="mb-4">
 
                 Make your next meal special.
                 Reserve your table today.
 
             </p>
-
 
             <a
                 href="reservation.php"
@@ -873,7 +896,6 @@ require_once "config/database.php";
 
             </a>
 
-
         </div>
 
     </div>
@@ -881,16 +903,13 @@ require_once "config/database.php";
 </section>
 
 
-
 <!-- ==================================================
-     FOOTER
+FOOTER
 ================================================== -->
 
 <footer class="bg-dark text-white py-5">
 
-
     <div class="container">
-
 
         <div class="row g-4">
 
@@ -898,7 +917,6 @@ require_once "config/database.php";
             <!-- BRAND -->
 
             <div class="col-lg-5">
-
 
                 <h4 class="fw-bold">
 
@@ -908,14 +926,12 @@ require_once "config/database.php";
 
                 </h4>
 
-
                 <p class="text-secondary">
 
                     Delicious food.
                     Memorable moments.
 
                 </p>
-
 
                 <div class="social-icons mt-3">
 
@@ -925,13 +941,11 @@ require_once "config/database.php";
 
                     </a>
 
-
                     <a href="#">
 
                         <i class="bi bi-instagram"></i>
 
                     </a>
-
 
                     <a href="#">
 
@@ -941,22 +955,18 @@ require_once "config/database.php";
 
                 </div>
 
-
             </div>
-
 
 
             <!-- QUICK LINKS -->
 
             <div class="col-lg-3">
 
-
                 <h6 class="fw-bold">
 
                     Quick Links
 
                 </h6>
-
 
                 <a
                     href="index.php"
@@ -966,7 +976,6 @@ require_once "config/database.php";
 
                 </a>
 
-
                 <a
                     href="menu.php"
                     class="footer-link">
@@ -975,7 +984,6 @@ require_once "config/database.php";
 
                 </a>
 
-
                 <a
                     href="about.php"
                     class="footer-link">
@@ -983,7 +991,6 @@ require_once "config/database.php";
                     About
 
                 </a>
-
 
                 <a
                     href="contact.php"
@@ -1006,22 +1013,18 @@ require_once "config/database.php";
 
                 <?php endif; ?>
 
-
             </div>
-
 
 
             <!-- CONTACT -->
 
             <div class="col-lg-4">
 
-
                 <h6 class="fw-bold">
 
                     Contact Us
 
                 </h6>
-
 
                 <p class="text-secondary">
 
@@ -1031,7 +1034,6 @@ require_once "config/database.php";
 
                 </p>
 
-
                 <p class="text-secondary">
 
                     <i class="bi bi-telephone text-warning"></i>
@@ -1040,7 +1042,6 @@ require_once "config/database.php";
 
                 </p>
 
-
                 <p class="text-secondary">
 
                     <i class="bi bi-envelope text-warning"></i>
@@ -1048,7 +1049,6 @@ require_once "config/database.php";
                     hello@bitecraft.com
 
                 </p>
-
 
             </div>
 
@@ -1066,11 +1066,9 @@ require_once "config/database.php";
 
         </div>
 
-
     </div>
 
 </footer>
-
 
 
 <!-- Bootstrap JS -->
