@@ -167,8 +167,6 @@ if ($result) {
 
 
     <style>
-
-
         body {
 
             background-color: #f8f9fa;
@@ -318,8 +316,7 @@ if ($result) {
             border: 0;
 
             box-shadow:
-                0 5px 20px
-                rgba(0, 0, 0, 0.05);
+                0 5px 20px rgba(0, 0, 0, 0.05);
 
             transition: 0.3s;
 
@@ -392,8 +389,7 @@ if ($result) {
             transform: translateY(-5px);
 
             box-shadow:
-                0 10px 25px
-                rgba(0,0,0,0.08);
+                0 10px 25px rgba(0, 0, 0, 0.08);
 
         }
 
@@ -476,8 +472,6 @@ if ($result) {
             }
 
         }
-
-
     </style>
 
 </head>
@@ -488,347 +482,295 @@ if ($result) {
 
 
 
-<!-- ==================================================
+    <!-- ==================================================
      SIDEBAR
 ================================================== -->
 
 
-<aside class="sidebar">
+    <aside class="sidebar">
 
 
-    <!-- LOGO -->
+        <!-- LOGO -->
 
-    <a
-        href="index.php"
-        class="sidebar-logo">
+        <a
+            href="index.php"
+            class="sidebar-logo">
 
-        <i class="bi bi-egg-fried"></i>
+            <i class="bi bi-egg-fried"></i>
 
-        Bite<span>Craft</span>
+            Bite<span>Craft</span>
 
-    </a>
+        </a>
 
 
 
-    <!-- DASHBOARD -->
+        <!-- DASHBOARD -->
 
-    <a
-        href="index.php"
-        class="sidebar-link active">
+        <a
+            href="index.php"
+            class="sidebar-link active">
 
-        <i class="bi bi-speedometer2"></i>
+            <i class="bi bi-speedometer2"></i>
 
-        <span>Dashboard</span>
+            <span>Dashboard</span>
 
-    </a>
+        </a>
 
 
 
-    <!-- MENU -->
+        <!-- MENU -->
 
-    <a
-        href="menu.php"
-        class="sidebar-link">
+        <a
+            href="menu.php"
+            class="sidebar-link">
 
-        <i class="bi bi-egg-fried"></i>
+            <i class="bi bi-egg-fried"></i>
 
-        <span>Menu Items</span>
+            <span>Menu Items</span>
 
-    </a>
+        </a>
 
 
 
-    <!-- ADD MENU -->
+        <!-- ADD MENU -->
 
-    <a
-        href="add-menu.php"
-        class="sidebar-link">
+        <a
+            href="add-menu.php"
+            class="sidebar-link">
 
-        <i class="bi bi-plus-circle"></i>
+            <i class="bi bi-plus-circle"></i>
 
-        <span>Add Menu Item</span>
+            <span>Add Menu Item</span>
 
-    </a>
+        </a>
 
 
 
-    <!-- ORDERS -->
+        <!-- ORDERS -->
 
-    <a
-        href="orders.php"
-        class="sidebar-link">
+        <a
+            href="orders.php"
+            class="sidebar-link">
 
-        <i class="bi bi-receipt"></i>
+            <i class="bi bi-receipt"></i>
 
-        <span>Orders</span>
+            <span>Orders</span>
 
-    </a>
+        </a>
 
 
 
-    <!-- RESERVATIONS -->
+        <!-- RESERVATIONS -->
 
-    <a
-        href="reservations.php"
-        class="sidebar-link">
+        <a
+            href="reservations.php"
+            class="sidebar-link">
 
-        <i class="bi bi-calendar-check"></i>
+            <i class="bi bi-calendar-check"></i>
 
-        <span>Reservations</span>
+            <span>Reservations</span>
 
-    </a>
+        </a>
 
 
 
-    <!-- USERS -->
+        <!-- USERS -->
 
-    <a
-        href="#"
-        class="sidebar-link">
+        <a
+            href="./users.php"
+            class="sidebar-link">
 
-        <i class="bi bi-people"></i>
+            <i class="bi bi-people"></i>
 
-        <span>Users</span>
+            <span>Users</span>
 
-    </a>
+        </a>
 
 
 
-    <hr class="border-secondary mx-3">
+        <hr class="border-secondary mx-3">
 
 
 
-    <!-- WEBSITE -->
+        <!-- WEBSITE -->
 
-    <a
-        href="../index.php"
-        class="sidebar-link">
+        <a
+            href="../index.php"
+            class="sidebar-link">
 
-        <i class="bi bi-globe"></i>
+            <i class="bi bi-globe"></i>
 
-        <span>View Website</span>
+            <span>View Website</span>
 
-    </a>
+        </a>
 
 
 
-    <!-- LOGOUT -->
+        <!-- LOGOUT -->
 
-    <a
-        href="logout.php"
-        class="sidebar-link">
+        <a
+            href="logout.php"
+            class="sidebar-link">
 
-        <i class="bi bi-box-arrow-right"></i>
+            <i class="bi bi-box-arrow-right"></i>
 
-        <span>Logout</span>
+            <span>Logout</span>
 
-    </a>
+        </a>
 
 
-</aside>
-
-
-
-<!-- ==================================================
-     MAIN CONTENT
-================================================== -->
-
-
-<main class="main-content">
-
-
-
-    <!-- TOPBAR -->
-
-    <div
-        class="topbar d-flex justify-content-between align-items-center">
-
-
-        <div>
-
-            <h5 class="mb-0 fw-bold">
-
-                Dashboard
-
-            </h5>
-
-        </div>
-
-
-
-        <div>
-
-            <i
-                class="bi bi-person-circle me-2">
-            </i>
-
-
-            <strong>
-
-                <?php
-
-                echo htmlspecialchars(
-                    $admin_name
-                );
-
-                ?>
-
-            </strong>
-
-        </div>
-
-
-    </div>
+    </aside>
 
 
 
     <!-- ==================================================
+     MAIN CONTENT
+================================================== -->
+
+
+    <main class="main-content">
+
+
+
+        <!-- TOPBAR -->
+
+        <div
+            class="topbar d-flex justify-content-between align-items-center">
+
+
+            <div>
+
+                <h5 class="mb-0 fw-bold">
+
+                    Dashboard
+
+                </h5>
+
+            </div>
+
+
+
+            <div>
+
+                <i
+                    class="bi bi-person-circle me-2">
+                </i>
+
+
+                <strong>
+
+                    <?php
+
+                    echo htmlspecialchars(
+                        $admin_name
+                    );
+
+                    ?>
+
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ==================================================
          PAGE CONTENT
     ================================================== -->
 
 
-    <div class="container-fluid p-4">
+        <div class="container-fluid p-4">
 
 
 
-        <!-- WELCOME -->
+            <!-- WELCOME -->
 
-        <div class="mb-4">
-
-
-            <h2 class="fw-bold">
-
-                Welcome back,
-
-                <?php
-
-                echo htmlspecialchars(
-                    $admin_name
-                );
-
-                ?>
-
-               ! 👋
-
-            </h2>
+            <div class="mb-4">
 
 
-            <p class="text-secondary">
+                <h2 class="fw-bold">
 
-                Here's what's happening with BiteCraft today.
+                    Welcome back,
 
-            </p>
+                    <?php
+
+                    echo htmlspecialchars(
+                        $admin_name
+                    );
+
+                    ?>
+
+                    ! 👋
+
+                </h2>
 
 
-        </div>
+                <p class="text-secondary">
+
+                    Here's what's happening with BiteCraft today.
+
+                </p>
+
+
+            </div>
 
 
 
-        <!-- ==================================================
+            <!-- ==================================================
              STAT CARDS
         ================================================== -->
 
 
-        <div class="row g-4 mb-5">
+            <div class="row g-4 mb-5">
 
 
 
-            <!-- USERS -->
+                <!-- USERS -->
 
-            <div class="col-sm-6 col-xl-3">
-
-
-                <div class="stat-card">
+                <div class="col-sm-6 col-xl-3">
 
 
-                    <div
-                        class="d-flex justify-content-between">
+                    <div class="stat-card">
 
 
-                        <div>
-
-                            <p
-                                class="text-secondary mb-1">
-
-                                Total Users
-
-                            </p>
+                        <div
+                            class="d-flex justify-content-between">
 
 
-                            <h2
-                                class="fw-bold mb-0">
+                            <div>
 
-                                <?php
+                                <p
+                                    class="text-secondary mb-1">
 
-                                echo $total_users;
+                                    Total Users
 
-                                ?>
-
-                            </h2>
-
-                        </div>
+                                </p>
 
 
-                        <div class="stat-icon">
+                                <h2
+                                    class="fw-bold mb-0">
 
-                            <i
-                                class="bi bi-people">
-                            </i>
+                                    <?php
 
-                        </div>
+                                    echo $total_users;
 
+                                    ?>
 
-                    </div>
+                                </h2>
 
-
-                </div>
-
-
-            </div>
+                            </div>
 
 
+                            <div class="stat-icon">
 
-            <!-- MENU -->
+                                <i
+                                    class="bi bi-people">
+                                </i>
 
-            <div class="col-sm-6 col-xl-3">
+                            </div>
 
-
-                <div class="stat-card">
-
-
-                    <div
-                        class="d-flex justify-content-between">
-
-
-                        <div>
-
-                            <p
-                                class="text-secondary mb-1">
-
-                                Menu Items
-
-                            </p>
-
-
-                            <h2
-                                class="fw-bold mb-0">
-
-                                <?php
-
-                                echo $total_menu;
-
-                                ?>
-
-                            </h2>
-
-                        </div>
-
-
-                        <div class="stat-icon">
-
-                            <i
-                                class="bi bi-egg-fried">
-                            </i>
 
                         </div>
 
@@ -839,106 +781,51 @@ if ($result) {
                 </div>
 
 
-            </div>
+
+                <!-- MENU -->
+
+                <div class="col-sm-6 col-xl-3">
 
 
-
-            <!-- CATEGORIES -->
-
-            <div class="col-sm-6 col-xl-3">
+                    <div class="stat-card">
 
 
-                <div class="stat-card">
+                        <div
+                            class="d-flex justify-content-between">
 
 
-                    <div
-                        class="d-flex justify-content-between">
+                            <div>
+
+                                <p
+                                    class="text-secondary mb-1">
+
+                                    Menu Items
+
+                                </p>
 
 
-                        <div>
+                                <h2
+                                    class="fw-bold mb-0">
 
-                            <p
-                                class="text-secondary mb-1">
+                                    <?php
 
-                                Categories
+                                    echo $total_menu;
 
-                            </p>
+                                    ?>
 
+                                </h2>
 
-                            <h2
-                                class="fw-bold mb-0">
-
-                                <?php
-
-                                echo $total_categories;
-
-                                ?>
-
-                            </h2>
-
-                        </div>
+                            </div>
 
 
-                        <div class="stat-icon">
+                            <div class="stat-icon">
 
-                            <i
-                                class="bi bi-grid">
-                            </i>
+                                <i
+                                    class="bi bi-egg-fried">
+                                </i>
 
-                        </div>
+                            </div>
 
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-
-            <!-- ORDERS -->
-
-            <div class="col-sm-6 col-xl-3">
-
-
-                <div class="stat-card">
-
-
-                    <div
-                        class="d-flex justify-content-between">
-
-
-                        <div>
-
-                            <p
-                                class="text-secondary mb-1">
-
-                                Total Orders
-
-                            </p>
-
-
-                            <h2
-                                class="fw-bold mb-0">
-
-                                <?php
-
-                                echo $total_orders;
-
-                                ?>
-
-                            </h2>
-
-                        </div>
-
-
-                        <div class="stat-icon">
-
-                            <i
-                                class="bi bi-receipt">
-                            </i>
 
                         </div>
 
@@ -949,57 +836,167 @@ if ($result) {
                 </div>
 
 
+
+                <!-- CATEGORIES -->
+
+                <div class="col-sm-6 col-xl-3">
+
+
+                    <div class="stat-card">
+
+
+                        <div
+                            class="d-flex justify-content-between">
+
+
+                            <div>
+
+                                <p
+                                    class="text-secondary mb-1">
+
+                                    Categories
+
+                                </p>
+
+
+                                <h2
+                                    class="fw-bold mb-0">
+
+                                    <?php
+
+                                    echo $total_categories;
+
+                                    ?>
+
+                                </h2>
+
+                            </div>
+
+
+                            <div class="stat-icon">
+
+                                <i
+                                    class="bi bi-grid">
+                                </i>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ORDERS -->
+
+                <div class="col-sm-6 col-xl-3">
+
+
+                    <div class="stat-card">
+
+
+                        <div
+                            class="d-flex justify-content-between">
+
+
+                            <div>
+
+                                <p
+                                    class="text-secondary mb-1">
+
+                                    Total Orders
+
+                                </p>
+
+
+                                <h2
+                                    class="fw-bold mb-0">
+
+                                    <?php
+
+                                    echo $total_orders;
+
+                                    ?>
+
+                                </h2>
+
+                            </div>
+
+
+                            <div class="stat-icon">
+
+                                <i
+                                    class="bi bi-receipt">
+                                </i>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
             </div>
 
 
 
-        </div>
-
-
-
-        <!-- ==================================================
+            <!-- ==================================================
              RESERVATIONS
         ================================================== -->
 
 
-        <div class="mb-5">
+            <div class="mb-5">
 
 
-            <div class="stat-card">
+                <div class="stat-card">
 
 
-                <div
-                    class="d-flex justify-content-between align-items-center">
+                    <div
+                        class="d-flex justify-content-between align-items-center">
 
 
-                    <div>
+                        <div>
 
-                        <p
-                            class="text-secondary mb-1">
+                            <p
+                                class="text-secondary mb-1">
 
-                            Total Reservations
+                                Total Reservations
 
-                        </p>
-
-
-                        <h2 class="fw-bold mb-0">
-
-                            <?php
-
-                            echo $total_reservations;
-
-                            ?>
-
-                        </h2>
-
-                    </div>
+                            </p>
 
 
-                    <div class="stat-icon">
+                            <h2 class="fw-bold mb-0">
 
-                        <i
-                            class="bi bi-calendar-check">
-                        </i>
+                                <?php
+
+                                echo $total_reservations;
+
+                                ?>
+
+                            </h2>
+
+                        </div>
+
+
+                        <div class="stat-icon">
+
+                            <i
+                                class="bi bi-calendar-check">
+                            </i>
+
+                        </div>
+
 
                     </div>
 
@@ -1010,186 +1007,183 @@ if ($result) {
             </div>
 
 
-        </div>
 
-
-
-        <!-- ==================================================
+            <!-- ==================================================
              QUICK ACTIONS
         ================================================== -->
 
 
-        <h4 class="fw-bold mb-3">
+            <h4 class="fw-bold mb-3">
 
-            Quick Actions
+                Quick Actions
 
-        </h4>
-
-
-
-        <div class="row g-4">
+            </h4>
 
 
 
-            <!-- ADD MENU -->
-
-            <div class="col-md-6 col-xl-3">
+            <div class="row g-4">
 
 
-                <a
-                    href="add-menu.php"
-                    class="action-card">
+
+                <!-- ADD MENU -->
+
+                <div class="col-md-6 col-xl-3">
 
 
-                    <i
-                        class="bi bi-plus-circle action-icon">
-                    </i>
+                    <a
+                        href="add-menu.php"
+                        class="action-card">
 
 
-                    <h5
-                        class="fw-bold mt-3">
-
-                        Add Menu Item
-
-                    </h5>
+                        <i
+                            class="bi bi-plus-circle action-icon">
+                        </i>
 
 
-                    <p
-                        class="text-secondary mb-0">
+                        <h5
+                            class="fw-bold mt-3">
 
-                        Add a new food item to your restaurant menu.
+                            Add Menu Item
 
-                    </p>
+                        </h5>
 
 
-                </a>
+                        <p
+                            class="text-secondary mb-0">
+
+                            Add a new food item to your restaurant menu.
+
+                        </p>
+
+
+                    </a>
+
+
+                </div>
+
+
+
+                <!-- MANAGE MENU -->
+
+                <div class="col-md-6 col-xl-3">
+
+
+                    <a
+                        href="menu.php"
+                        class="action-card">
+
+
+                        <i
+                            class="bi bi-list-ul action-icon">
+                        </i>
+
+
+                        <h5
+                            class="fw-bold mt-3">
+
+                            Manage Menu
+
+                        </h5>
+
+
+                        <p
+                            class="text-secondary mb-0">
+
+                            View, edit and delete menu items.
+
+                        </p>
+
+
+                    </a>
+
+
+                </div>
+
+
+
+                <!-- ORDERS -->
+
+                <div class="col-md-6 col-xl-3">
+
+
+                    <a
+                        href="orders.php"
+                        class="action-card">
+
+
+                        <i
+                            class="bi bi-receipt action-icon">
+                        </i>
+
+
+                        <h5
+                            class="fw-bold mt-3">
+
+                            Manage Orders
+
+                        </h5>
+
+
+                        <p
+                            class="text-secondary mb-0">
+
+                            View and manage customer orders.
+
+                        </p>
+
+
+                    </a>
+
+
+                </div>
+
+
+
+                <!-- WEBSITE -->
+
+                <div class="col-md-6 col-xl-3">
+
+
+                    <a
+                        href="../index.php"
+                        class="action-card">
+
+
+                        <i
+                            class="bi bi-globe2 action-icon">
+                        </i>
+
+
+                        <h5
+                            class="fw-bold mt-3">
+
+                            View Website
+
+                        </h5>
+
+
+                        <p
+                            class="text-secondary mb-0">
+
+                            Open the customer-facing restaurant website.
+
+                        </p>
+
+
+                    </a>
+
+
+                </div>
+
 
 
             </div>
-
-
-
-            <!-- MANAGE MENU -->
-
-            <div class="col-md-6 col-xl-3">
-
-
-                <a
-                    href="menu.php"
-                    class="action-card">
-
-
-                    <i
-                        class="bi bi-list-ul action-icon">
-                    </i>
-
-
-                    <h5
-                        class="fw-bold mt-3">
-
-                        Manage Menu
-
-                    </h5>
-
-
-                    <p
-                        class="text-secondary mb-0">
-
-                        View, edit and delete menu items.
-
-                    </p>
-
-
-                </a>
-
-
-            </div>
-
-
-
-            <!-- ORDERS -->
-
-            <div class="col-md-6 col-xl-3">
-
-
-                <a
-                    href="orders.php"
-                    class="action-card">
-
-
-                    <i
-                        class="bi bi-receipt action-icon">
-                    </i>
-
-
-                    <h5
-                        class="fw-bold mt-3">
-
-                        Manage Orders
-
-                    </h5>
-
-
-                    <p
-                        class="text-secondary mb-0">
-
-                        View and manage customer orders.
-
-                    </p>
-
-
-                </a>
-
-
-            </div>
-
-
-
-            <!-- WEBSITE -->
-
-            <div class="col-md-6 col-xl-3">
-
-
-                <a
-                    href="../index.php"
-                    class="action-card">
-
-
-                    <i
-                        class="bi bi-globe2 action-icon">
-                    </i>
-
-
-                    <h5
-                        class="fw-bold mt-3">
-
-                        View Website
-
-                    </h5>
-
-
-                    <p
-                        class="text-secondary mb-0">
-
-                        Open the customer-facing restaurant website.
-
-                    </p>
-
-
-                </a>
-
-
-            </div>
-
 
 
         </div>
 
 
-    </div>
-
-
-</main>
+    </main>
 
 
 </body>

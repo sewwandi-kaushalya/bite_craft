@@ -397,7 +397,7 @@ $result = $conn->query($sql);
     <!-- USERS -->
 
     <a
-        href="#"
+        href="../admin/users.php"
         class="sidebar-link">
 
         <i class="bi bi-people"></i>

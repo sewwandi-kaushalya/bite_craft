@@ -294,7 +294,7 @@ $result = $conn->query($sql);
     <!-- Reservations -->
 
     <a
-        href="#"
+        href="reservations.php"
         class="sidebar-link">
 
         <i class="bi bi-calendar-check"></i>
@@ -307,7 +307,7 @@ $result = $conn->query($sql);
     <!-- Users -->
 
     <a
-        href="#"
+        href="users.php"
         class="sidebar-link">
 
         <i class="bi bi-people"></i>
