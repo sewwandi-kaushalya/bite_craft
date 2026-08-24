@@ -1,3 +1,4 @@
+
 <?php
 
 session_start();
@@ -5,17 +6,19 @@ session_start();
 require_once "config/database.php";
 
 $error = "";
-$success = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $name = trim($_POST["name"]);
-    $email = trim($_POST["email"]);
-    $password = $_POST["password"];
-    $confirm_password = $_POST["confirm_password"];
+    $name = trim($_POST["name"] ?? "");
+    $email = trim($_POST["email"] ?? "");
+    $password = $_POST["password"] ?? "";
+    $confirm_password = $_POST["confirm_password"] ?? "";
 
 
-    // Check empty fields
+    // ========================================
+    // CHECK EMPTY FIELDS
+    // ========================================
+
     if (
         empty($name) ||
         empty($email) ||
@@ -28,7 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
 
-    // Check password
+    // ========================================
+    // CHECK PASSWORD MATCH
+    // ========================================
+
     elseif ($password !== $confirm_password) {
 
         $error = "Passwords do not match.";
@@ -36,7 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
 
-    // Check password length
+    // ========================================
+    // CHECK PASSWORD LENGTH
+    // ========================================
+
     elseif (strlen($password) < 6) {
 
         $error = "Password must be at least 6 characters.";
@@ -44,12 +53,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
 
+    // ========================================
+    // CHECK EMAIL
+    // ========================================
+
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+        $error = "Please enter a valid email address.";
+
+    }
+
+
     else {
 
-        // Check existing email
+        // ========================================
+        // CHECK EXISTING EMAIL
+        // ========================================
 
         $stmt = $conn->prepare(
-            "SELECT id FROM users WHERE email = ? LIMIT 1"
+            "SELECT id
+             FROM users
+             WHERE email = ?
+             LIMIT 1"
         );
 
         $stmt->bind_param("s", $email);
@@ -57,6 +82,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->execute();
 
         $result = $stmt->get_result();
+
+        $stmt->close();
 
 
         if ($result->num_rows > 0) {
@@ -67,7 +94,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         else {
 
-            // Hash password
+            // ========================================
+            // HASH PASSWORD
+            // ========================================
 
             $hashed_password = password_hash(
                 $password,
@@ -75,7 +104,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             );
 
 
-            // Insert user
+            // ========================================
+            // INSERT USER
+            // ========================================
 
             $stmt = $conn->prepare(
                 "INSERT INTO users
@@ -91,18 +122,46 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             );
 
 
+            // ========================================
+            // REGISTRATION SUCCESS
+            // ========================================
+
             if ($stmt->execute()) {
 
-                $success =
-                    "Registration successful! You can now login.";
+                // Get newly created user ID
+                $new_user_id = $stmt->insert_id;
+
+
+                // ========================================
+                // AUTOMATIC LOGIN
+                // ========================================
+
+                $_SESSION["user_id"] = $new_user_id;
+
+                $_SESSION["user_name"] = $name;
+
+                $_SESSION["user_role"] = "customer";
+
+
+                // ========================================
+                // REDIRECT TO HOME
+                // ========================================
+
+                header("Location: index.php");
+
+                exit;
 
             }
+
             else {
 
                 $error =
                     "Something went wrong. Please try again.";
 
             }
+
+
+            $stmt->close();
 
         }
 
@@ -163,7 +222,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="card-body p-5">
 
 
-                    <!-- Logo -->
+                    <!-- ========================================
+                         LOGO
+                    ======================================== -->
 
                     <div class="text-center mb-4">
 
@@ -192,7 +253,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 
-                    <!-- Error -->
+                    <!-- ========================================
+                         ERROR MESSAGE
+                    ======================================== -->
 
                     <?php if ($error): ?>
 
@@ -200,7 +263,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                             <i class="bi bi-exclamation-circle"></i>
 
-                            <?php echo htmlspecialchars($error); ?>
+                            <?php
+
+                            echo htmlspecialchars($error);
+
+                            ?>
 
                         </div>
 
@@ -208,31 +275,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 
-                    <!-- Success -->
-
-                    <?php if ($success): ?>
-
-                        <div class="alert alert-success">
-
-                            <i class="bi bi-check-circle"></i>
-
-                            <?php echo htmlspecialchars($success); ?>
-
-                        </div>
-
-                    <?php endif; ?>
-
-
-
-                    <!-- Register Form -->
+                    <!-- ========================================
+                         REGISTER FORM
+                    ======================================== -->
 
                     <form method="POST">
 
 
-                        <!-- Name -->
+                        <!-- NAME -->
 
                         <div class="mb-3">
-
 
                             <label class="form-label">
 
@@ -242,7 +294,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
                             <div class="input-group">
-
 
                                 <span class="input-group-text">
 
@@ -256,19 +307,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     name="name"
                                     class="form-control"
                                     placeholder="Enter your name"
+                                    value="<?php echo htmlspecialchars($_POST["name"] ?? ""); ?>"
                                     required>
 
                             </div>
-
 
                         </div>
 
 
 
-                        <!-- Email -->
+                        <!-- EMAIL -->
 
                         <div class="mb-3">
-
 
                             <label class="form-label">
 
@@ -278,7 +328,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
                             <div class="input-group">
-
 
                                 <span class="input-group-text">
 
@@ -292,19 +341,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     name="email"
                                     class="form-control"
                                     placeholder="Enter your email"
+                                    value="<?php echo htmlspecialchars($_POST["email"] ?? ""); ?>"
                                     required>
 
                             </div>
-
 
                         </div>
 
 
 
-                        <!-- Password -->
+                        <!-- PASSWORD -->
 
                         <div class="mb-3">
-
 
                             <label class="form-label">
 
@@ -314,7 +362,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
                             <div class="input-group">
-
 
                                 <span class="input-group-text">
 
@@ -332,15 +379,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                             </div>
 
-
                         </div>
 
 
 
-                        <!-- Confirm Password -->
+                        <!-- CONFIRM PASSWORD -->
 
                         <div class="mb-4">
-
 
                             <label class="form-label">
 
@@ -350,7 +395,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
                             <div class="input-group">
-
 
                                 <span class="input-group-text">
 
@@ -368,12 +412,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                             </div>
 
-
                         </div>
 
 
 
-                        <!-- Button -->
+                        <!-- SUBMIT -->
 
                         <button
                             type="submit"
@@ -390,10 +433,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 
-                    <!-- Login -->
+                    <!-- ========================================
+                         LOGIN LINK
+                    ======================================== -->
 
                     <div class="text-center mt-4">
-
 
                         <span class="text-secondary">
 
@@ -410,15 +454,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                         </a>
 
-
                     </div>
 
 
 
-                    <!-- Home -->
+                    <!-- ========================================
+                         HOME LINK
+                    ======================================== -->
 
                     <div class="text-center mt-3">
-
 
                         <a
                             href="index.php"
@@ -429,7 +473,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             Back to Home
 
                         </a>
-
 
                     </div>
 
@@ -452,3 +495,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </body>
 
 </html>
+
