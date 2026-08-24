@@ -381,11 +381,13 @@ HERO SECTION
 
             <div class="col-lg-6 text-center mt-5 mt-lg-0">
 
-                <div class="hero-circle">
+                <!-- <div class="hero-circle">
 
                     <i class="bi bi-egg-fried"></i>
 
-                </div>
+                </div> -->
+
+                <img src="./assets/images/hero_img.png" alt="Hero Image">
 
             </div>
 
@@ -571,7 +573,7 @@ POPULAR DISHES
 
                     <div class="food-image">
 
-                        <i class="bi bi-egg-fried"></i>
+                        <img src="./assets/images/chicken_burger.png" alt="" class="img-fluid" style="max-height: 200px; object-fit: cover;">
 
                     </div>
 
@@ -622,7 +624,7 @@ POPULAR DISHES
 
                     <div class="food-image">
 
-                        <i class="bi bi-cup-hot"></i>
+                        <img src="./assets/images/Creamy Pasta.png" alt="" class="img-fluid" style="max-height: 200px; object-fit: cover;">
 
                     </div>
 
@@ -673,7 +675,7 @@ POPULAR DISHES
 
                     <div class="food-image">
 
-                        <i class="bi bi-circle-fill"></i>
+                        <img src="./assets/images/Cheese Pizza.png" alt="" class="img-fluid" style="max-height: 200px; object-fit: cover;">
 
                     </div>
 
@@ -724,7 +726,7 @@ POPULAR DISHES
 
                     <div class="food-image">
 
-                        <i class="bi bi-fire"></i>
+                        <img src="./assets/images/Grilled Chicken.png" alt="" class="img-fluid" style="max-height: 200px; object-fit: cover;">
 
                     </div>
 
@@ -802,9 +804,9 @@ ABOUT SECTION
 
             <div class="col-lg-6">
 
-                <div class="about-image">
+                <div class="">
 
-                    <i class="bi bi-shop"></i>
+                   <img src="./assets/images/about.png" alt="" class="img-fluid" style="object-fit: cover;">
 
                 </div>
 
@@ -926,7 +928,7 @@ FOOTER
 
                 </h4>
 
-                <p class="text-secondary">
+                <p class="text-white opacity-75">
 
                     Delicious food.
                     Memorable moments.
@@ -1026,7 +1028,7 @@ FOOTER
 
                 </h6>
 
-                <p class="text-secondary">
+                <p class="text-white opacity-75">
 
                     <i class="bi bi-geo-alt text-warning"></i>
 
@@ -1034,7 +1036,7 @@ FOOTER
 
                 </p>
 
-                <p class="text-secondary">
+                <p class="text-white opacity-75">
 
                     <i class="bi bi-telephone text-warning"></i>
 
@@ -1042,7 +1044,7 @@ FOOTER
 
                 </p>
 
-                <p class="text-secondary">
+                <p class="text-white opacity-75">
 
                     <i class="bi bi-envelope text-warning"></i>
 
@@ -1059,7 +1061,7 @@ FOOTER
         <hr class="border-secondary mt-4">
 
 
-        <div class="text-center text-secondary">
+        <div class="text-center">
 
             © 2026 BiteCraft Restaurant.
             All Rights Reserved.
