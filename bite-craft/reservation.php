@@ -1065,42 +1065,269 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
      FOOTER
 ======================================== -->
 
-<footer
-    class="bg-dark text-white py-4">
+
+<!-- ==================================================
+     COMMON FOOTER
+================================================== -->
+
+<footer class="bg-dark text-white py-5">
 
     <div class="container">
 
-        <div
-            class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div class="row g-4">
 
+            <!-- BRAND -->
+            <div class="col-lg-5">
 
-            <div>
+                <h4 class="fw-bold">
 
-                <i
-                    class="bi bi-egg-fried text-warning">
-                </i>
+                    <i class="bi bi-egg-fried text-warning"></i>
 
-                <strong>
                     BiteCraft
-                </strong>
+
+                </h4>
+
+                <p class="text-white opacity-75">
+
+                    Delicious food.
+                    Memorable moments.
+
+                </p>
+
+                <!-- SOCIAL ICONS -->
+
+                <div class="social-icons mt-3">
+
+                    <a
+                        href="#"
+                        class="text-white me-3 text-decoration-none">
+
+                        <i class="bi bi-facebook"></i>
+
+                    </a>
+
+                    <a
+                        href="#"
+                        class="text-white me-3 text-decoration-none">
+
+                        <i class="bi bi-instagram"></i>
+
+                    </a>
+
+                    <a
+                        href="#"
+                        class="text-white text-decoration-none">
+
+                        <i class="bi bi-whatsapp"></i>
+
+                    </a>
+
+                </div>
 
             </div>
 
 
-            <div
-                class="text-secondary">
+            <!-- QUICK LINKS -->
 
-                © 2026 BiteCraft Restaurant.
+            <div class="col-lg-3">
+
+                <h6 class="fw-bold mb-3">
+
+                    Quick Links
+
+                </h6>
+
+
+                <a
+                    href="index.php"
+                    class="footer-link">
+
+                    Home
+
+                </a>
+
+
+                <a
+                    href="menu.php"
+                    class="footer-link">
+
+                    Menu
+
+                </a>
+
+
+                <a
+                    href="about.php"
+                    class="footer-link">
+
+                    About
+
+                </a>
+
+
+                <a
+                    href="contact.php"
+                    class="footer-link">
+
+                    Contact
+
+                </a>
+
+
+                <?php if (isset($_SESSION["user_id"])): ?>
+
+                    <a
+                        href="my-orders.php"
+                        class="footer-link">
+
+                        My Orders
+
+                    </a>
+
+                <?php endif; ?>
+
+
+                <?php if (
+                    isset($_SESSION["user_role"]) &&
+                    $_SESSION["user_role"] === "admin"
+                ): ?>
+
+                    <a
+                        href="admin/index.php"
+                        class="footer-link">
+
+                        Admin Dashboard
+
+                    </a>
+
+                <?php endif; ?>
+
+            </div>
+
+
+            <!-- CONTACT -->
+
+            <div class="col-lg-4">
+
+                <h6 class="fw-bold mb-3">
+
+                    Contact Us
+
+                </h6>
+
+
+                <p class="text-white opacity-75 mb-2">
+
+                    <i class="bi bi-geo-alt text-warning"></i>
+
+                    Colombo, Sri Lanka
+
+                </p>
+
+
+                <p class="text-white opacity-75 mb-2">
+
+                    <i class="bi bi-telephone text-warning"></i>
+
+                    +94 77 123 4567
+
+                </p>
+
+
+                <p class="text-white opacity-75 mb-2">
+
+                    <i class="bi bi-envelope text-warning"></i>
+
+                    hello@bitecraft.com
+
+                </p>
+
+
+                <p class="text-white opacity-75">
+
+                    <i class="bi bi-clock text-warning"></i>
+
+                    Mon - Sun: 9:00 AM - 11:00 PM
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <hr class="border-secondary mt-4">
+
+
+        <!-- COPYRIGHT -->
+
+        <div class="text-center">
+
+            <p class="text-white opacity-75 mb-0">
+
+                © <?php echo date("Y"); ?>
+
+                BiteCraft Restaurant.
+
                 All Rights Reserved.
 
-            </div>
-
+            </p>
 
         </div>
 
     </div>
 
 </footer>
+
+
+<!-- ==================================================
+     COMMON FOOTER CSS
+================================================== -->
+
+<style>
+
+    .footer-link {
+
+        display: block;
+
+        color: rgba(255, 255, 255, 0.65);
+
+        text-decoration: none;
+
+        margin-bottom: 10px;
+
+        transition: 0.3s;
+
+    }
+
+
+    .footer-link:hover {
+
+        color: #ffc107;
+
+        padding-left: 5px;
+
+    }
+
+
+    .social-icons a {
+
+        font-size: 21px;
+
+        transition: 0.3s;
+
+    }
+
+
+    .social-icons a:hover {
+
+        color: #ffc107 !important;
+
+    }
+
+</style>
+
+
 
 
 <!-- Bootstrap JS -->

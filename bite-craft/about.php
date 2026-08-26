@@ -242,12 +242,18 @@ require_once "config/database.php";
 NAVBAR
 ================================================== -->
 
+<!-- ==================================================
+     COMMON NAVBAR
+================================================== -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
 
     <div class="container">
 
 
-        <!-- LOGO -->
+        <!-- ==================================================
+             LOGO
+        ================================================== -->
 
         <a
             class="navbar-brand fw-bold fs-3"
@@ -260,20 +266,27 @@ NAVBAR
         </a>
 
 
-        <!-- MOBILE -->
+        <!-- ==================================================
+             MOBILE MENU BUTTON
+        ================================================== -->
 
         <button
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarMenu">
+            data-bs-target="#navbarMenu"
+            aria-controls="navbarMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
 
             <span class="navbar-toggler-icon"></span>
 
         </button>
 
 
-        <!-- NAVIGATION -->
+        <!-- ==================================================
+             NAVIGATION MENU
+        ================================================== -->
 
         <div
             class="collapse navbar-collapse"
@@ -281,6 +294,10 @@ NAVBAR
 
             <ul class="navbar-nav ms-auto align-items-lg-center">
 
+
+                <!-- ==================================================
+                     HOME
+                ================================================== -->
 
                 <li class="nav-item">
 
@@ -295,6 +312,10 @@ NAVBAR
                 </li>
 
 
+                <!-- ==================================================
+                     MENU
+                ================================================== -->
+
                 <li class="nav-item">
 
                     <a
@@ -308,10 +329,14 @@ NAVBAR
                 </li>
 
 
+                <!-- ==================================================
+                     ABOUT
+                ================================================== -->
+
                 <li class="nav-item">
 
                     <a
-                        class="nav-link active"
+                        class="nav-link"
                         href="about.php">
 
                         About
@@ -320,6 +345,10 @@ NAVBAR
 
                 </li>
 
+
+                <!-- ==================================================
+                     CONTACT
+                ================================================== -->
 
                 <li class="nav-item">
 
@@ -334,7 +363,14 @@ NAVBAR
                 </li>
 
 
+                <!-- ==================================================
+                     LOGGED-IN USER
+                ================================================== -->
+
                 <?php if (isset($_SESSION["user_id"])): ?>
+
+
+                    <!-- MY ORDERS -->
 
                     <li class="nav-item">
 
@@ -350,10 +386,125 @@ NAVBAR
 
                     </li>
 
+
+                    <!-- ==================================================
+                         ADMIN DASHBOARD
+                    ================================================== -->
+
+                    <?php if (
+                        isset($_SESSION["user_role"]) &&
+                        $_SESSION["user_role"] === "admin"
+                    ): ?>
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link text-danger fw-semibold"
+                                href="admin/index.php">
+
+                                <i class="bi bi-speedometer2"></i>
+
+                                Admin Dashboard
+
+                            </a>
+
+                        </li>
+
+                    <?php endif; ?>
+
+
+                    <!-- ==================================================
+                         USER NAME
+                    ================================================== -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <span class="nav-link">
+
+                            <i class="bi bi-person-circle"></i>
+
+                            <?php
+
+                            echo htmlspecialchars(
+                                $_SESSION["user_name"] ?? "User"
+                            );
+
+                            ?>
+
+                        </span>
+
+                    </li>
+
+
+                    <!-- ==================================================
+                         LOGOUT
+                    ================================================== -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            href="logout.php"
+                            class="btn btn-outline-dark px-3">
+
+                            <i class="bi bi-box-arrow-right"></i>
+
+                            Logout
+
+                        </a>
+
+                    </li>
+
+
+                <?php else: ?>
+
+
+                    <!-- ==================================================
+                         GUEST USER
+                    ================================================== -->
+
+
+                    <!-- LOGIN -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            href="login.php"
+                            class="btn btn-outline-dark px-3">
+
+                            <i class="bi bi-box-arrow-in-right"></i>
+
+                            Login
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- REGISTER -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            href="register.php"
+                            class="btn btn-dark px-3">
+
+                            <i class="bi bi-person-plus"></i>
+
+                            Register
+
+                        </a>
+
+                    </li>
+
+
                 <?php endif; ?>
 
 
-                <li class="nav-item ms-lg-3">
+                <!-- ==================================================
+                     BOOK A TABLE
+                ================================================== -->
+
+                <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
 
                     <a
                         href="reservation.php"

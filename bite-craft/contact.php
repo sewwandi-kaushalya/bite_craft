@@ -274,10 +274,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 NAVBAR
 ================================================== -->
 
+<!-- ==================================================
+     COMMON NAVBAR
+================================================== -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
 
     <div class="container">
 
+
+        <!-- ==================================================
+             LOGO
+        ================================================== -->
 
         <a
             class="navbar-brand fw-bold fs-3"
@@ -290,16 +298,27 @@ NAVBAR
         </a>
 
 
+        <!-- ==================================================
+             MOBILE MENU BUTTON
+        ================================================== -->
+
         <button
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarMenu">
+            data-bs-target="#navbarMenu"
+            aria-controls="navbarMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
 
             <span class="navbar-toggler-icon"></span>
 
         </button>
 
+
+        <!-- ==================================================
+             NAVIGATION MENU
+        ================================================== -->
 
         <div
             class="collapse navbar-collapse"
@@ -307,6 +326,10 @@ NAVBAR
 
             <ul class="navbar-nav ms-auto align-items-lg-center">
 
+
+                <!-- ==================================================
+                     HOME
+                ================================================== -->
 
                 <li class="nav-item">
 
@@ -321,6 +344,10 @@ NAVBAR
                 </li>
 
 
+                <!-- ==================================================
+                     MENU
+                ================================================== -->
+
                 <li class="nav-item">
 
                     <a
@@ -333,6 +360,10 @@ NAVBAR
 
                 </li>
 
+
+                <!-- ==================================================
+                     ABOUT
+                ================================================== -->
 
                 <li class="nav-item">
 
@@ -347,10 +378,14 @@ NAVBAR
                 </li>
 
 
+                <!-- ==================================================
+                     CONTACT
+                ================================================== -->
+
                 <li class="nav-item">
 
                     <a
-                        class="nav-link active"
+                        class="nav-link"
                         href="contact.php">
 
                         Contact
@@ -360,7 +395,14 @@ NAVBAR
                 </li>
 
 
+                <!-- ==================================================
+                     LOGGED-IN USER
+                ================================================== -->
+
                 <?php if (isset($_SESSION["user_id"])): ?>
+
+
+                    <!-- MY ORDERS -->
 
                     <li class="nav-item">
 
@@ -376,10 +418,125 @@ NAVBAR
 
                     </li>
 
+
+                    <!-- ==================================================
+                         ADMIN DASHBOARD
+                    ================================================== -->
+
+                    <?php if (
+                        isset($_SESSION["user_role"]) &&
+                        $_SESSION["user_role"] === "admin"
+                    ): ?>
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link text-danger fw-semibold"
+                                href="admin/index.php">
+
+                                <i class="bi bi-speedometer2"></i>
+
+                                Admin Dashboard
+
+                            </a>
+
+                        </li>
+
+                    <?php endif; ?>
+
+
+                    <!-- ==================================================
+                         USER NAME
+                    ================================================== -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <span class="nav-link">
+
+                            <i class="bi bi-person-circle"></i>
+
+                            <?php
+
+                            echo htmlspecialchars(
+                                $_SESSION["user_name"] ?? "User"
+                            );
+
+                            ?>
+
+                        </span>
+
+                    </li>
+
+
+                    <!-- ==================================================
+                         LOGOUT
+                    ================================================== -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            href="logout.php"
+                            class="btn btn-outline-dark px-3">
+
+                            <i class="bi bi-box-arrow-right"></i>
+
+                            Logout
+
+                        </a>
+
+                    </li>
+
+
+                <?php else: ?>
+
+
+                    <!-- ==================================================
+                         GUEST USER
+                    ================================================== -->
+
+
+                    <!-- LOGIN -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            href="login.php"
+                            class="btn btn-outline-dark px-3">
+
+                            <i class="bi bi-box-arrow-in-right"></i>
+
+                            Login
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- REGISTER -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            href="register.php"
+                            class="btn btn-dark px-3">
+
+                            <i class="bi bi-person-plus"></i>
+
+                            Register
+
+                        </a>
+
+                    </li>
+
+
                 <?php endif; ?>
 
 
-                <li class="nav-item ms-lg-3">
+                <!-- ==================================================
+                     BOOK A TABLE
+                ================================================== -->
+
+                <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
 
                     <a
                         href="reservation.php"
@@ -825,13 +982,18 @@ MAP / CTA
 FOOTER
 ================================================== -->
 
+
+<!-- ==================================================
+     COMMON FOOTER
+================================================== -->
+
 <footer class="bg-dark text-white py-5">
 
     <div class="container">
 
         <div class="row g-4">
 
-
+            <!-- BRAND -->
             <div class="col-lg-5">
 
                 <h4 class="fw-bold">
@@ -842,28 +1004,36 @@ FOOTER
 
                 </h4>
 
-                <p class="text-secondary">
+                <p class="text-white opacity-75">
 
                     Delicious food.
                     Memorable moments.
 
                 </p>
 
+                <!-- SOCIAL ICONS -->
+
                 <div class="social-icons mt-3">
 
-                    <a href="#">
+                    <a
+                        href="#"
+                        class="text-white me-3 text-decoration-none">
 
                         <i class="bi bi-facebook"></i>
 
                     </a>
 
-                    <a href="#">
+                    <a
+                        href="#"
+                        class="text-white me-3 text-decoration-none">
 
                         <i class="bi bi-instagram"></i>
 
                     </a>
 
-                    <a href="#">
+                    <a
+                        href="#"
+                        class="text-white text-decoration-none">
 
                         <i class="bi bi-whatsapp"></i>
 
@@ -874,13 +1044,16 @@ FOOTER
             </div>
 
 
+            <!-- QUICK LINKS -->
+
             <div class="col-lg-3">
 
-                <h6 class="fw-bold">
+                <h6 class="fw-bold mb-3">
 
                     Quick Links
 
                 </h6>
+
 
                 <a
                     href="index.php"
@@ -890,6 +1063,7 @@ FOOTER
 
                 </a>
 
+
                 <a
                     href="menu.php"
                     class="footer-link">
@@ -897,6 +1071,7 @@ FOOTER
                     Menu
 
                 </a>
+
 
                 <a
                     href="about.php"
@@ -906,6 +1081,7 @@ FOOTER
 
                 </a>
 
+
                 <a
                     href="contact.php"
                     class="footer-link">
@@ -913,6 +1089,7 @@ FOOTER
                     Contact
 
                 </a>
+
 
                 <?php if (isset($_SESSION["user_id"])): ?>
 
@@ -926,18 +1103,37 @@ FOOTER
 
                 <?php endif; ?>
 
+
+                <?php if (
+                    isset($_SESSION["user_role"]) &&
+                    $_SESSION["user_role"] === "admin"
+                ): ?>
+
+                    <a
+                        href="admin/index.php"
+                        class="footer-link">
+
+                        Admin Dashboard
+
+                    </a>
+
+                <?php endif; ?>
+
             </div>
 
 
+            <!-- CONTACT -->
+
             <div class="col-lg-4">
 
-                <h6 class="fw-bold">
+                <h6 class="fw-bold mb-3">
 
                     Contact Us
 
                 </h6>
 
-                <p class="text-secondary">
+
+                <p class="text-white opacity-75 mb-2">
 
                     <i class="bi bi-geo-alt text-warning"></i>
 
@@ -945,7 +1141,8 @@ FOOTER
 
                 </p>
 
-                <p class="text-secondary">
+
+                <p class="text-white opacity-75 mb-2">
 
                     <i class="bi bi-telephone text-warning"></i>
 
@@ -953,7 +1150,8 @@ FOOTER
 
                 </p>
 
-                <p class="text-secondary">
+
+                <p class="text-white opacity-75 mb-2">
 
                     <i class="bi bi-envelope text-warning"></i>
 
@@ -961,8 +1159,16 @@ FOOTER
 
                 </p>
 
-            </div>
 
+                <p class="text-white opacity-75">
+
+                    <i class="bi bi-clock text-warning"></i>
+
+                    Mon - Sun: 9:00 AM - 11:00 PM
+
+                </p>
+
+            </div>
 
         </div>
 
@@ -970,16 +1176,75 @@ FOOTER
         <hr class="border-secondary mt-4">
 
 
-        <div class="text-center text-secondary">
+        <!-- COPYRIGHT -->
 
-            © 2026 BiteCraft Restaurant.
-            All Rights Reserved.
+        <div class="text-center">
+
+            <p class="text-white opacity-75 mb-0">
+
+                © <?php echo date("Y"); ?>
+
+                BiteCraft Restaurant.
+
+                All Rights Reserved.
+
+            </p>
 
         </div>
 
     </div>
 
 </footer>
+
+
+<!-- ==================================================
+     COMMON FOOTER CSS
+================================================== -->
+
+<style>
+
+    .footer-link {
+
+        display: block;
+
+        color: rgba(255, 255, 255, 0.65);
+
+        text-decoration: none;
+
+        margin-bottom: 10px;
+
+        transition: 0.3s;
+
+    }
+
+
+    .footer-link:hover {
+
+        color: #ffc107;
+
+        padding-left: 5px;
+
+    }
+
+
+    .social-icons a {
+
+        font-size: 21px;
+
+        transition: 0.3s;
+
+    }
+
+
+    .social-icons a:hover {
+
+        color: #ffc107 !important;
+
+    }
+
+</style>
+
+
 
 
 <script

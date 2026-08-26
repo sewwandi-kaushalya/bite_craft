@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once "config/database.php";
 
 
@@ -7,7 +9,7 @@ require_once "config/database.php";
 // GET AVAILABLE MENU ITEMS
 // ========================================
 
-$sql = "SELECT 
+$sql = "SELECT
             menu_items.*,
             categories.name AS category_name
         FROM menu_items
@@ -19,7 +21,6 @@ $sql = "SELECT
 $result = $conn->query($sql);
 
 ?>
-
 
 <!DOCTYPE html>
 
@@ -73,6 +74,13 @@ $result = $conn->query($sql);
            NAVBAR
         ================================= */
 
+        .navbar {
+
+            background-color: white;
+
+        }
+
+
         .navbar-brand {
 
             font-size: 25px;
@@ -83,6 +91,40 @@ $result = $conn->query($sql);
         .navbar-brand span {
 
             color: #ffc107;
+
+        }
+
+
+        .navbar .nav-link {
+
+            color: #212529;
+
+            font-weight: 500;
+
+            margin-left: 8px;
+
+        }
+
+
+        .navbar .nav-link:hover {
+
+            color: #ffc107;
+
+        }
+
+
+        .navbar .nav-link.active {
+
+            color: #ffc107;
+
+            font-weight: 600;
+
+        }
+
+
+        .navbar .btn-warning {
+
+            font-weight: 600;
 
         }
 
@@ -175,9 +217,11 @@ $result = $conn->query($sql);
 
             width: 100%;
 
-            height: 230px;
+            height: 200px;
 
             object-fit: cover;
+
+            display: block;
 
         }
 
@@ -190,7 +234,7 @@ $result = $conn->query($sql);
 
             width: 100%;
 
-            height: 230px;
+            height: 200px;
 
             background-color: #f1f3f5;
 
@@ -275,7 +319,7 @@ $result = $conn->query($sql);
 
         .food-price {
 
-            font-size: 20px;
+            font-size: 19px;
 
             font-weight: bold;
 
@@ -293,6 +337,17 @@ $result = $conn->query($sql);
             border-radius: 8px;
 
             font-weight: 600;
+
+        }
+
+
+        .order-btn:hover {
+
+            background-color: #212529;
+
+            color: white;
+
+            border-color: #212529;
 
         }
 
@@ -330,6 +385,22 @@ $result = $conn->query($sql);
         }
 
 
+        .footer-link {
+
+            color: #adb5bd;
+
+            text-decoration: none;
+
+        }
+
+
+        .footer-link:hover {
+
+            color: #ffc107;
+
+        }
+
+
         /* ================================
            MOBILE
         ================================= */
@@ -349,6 +420,20 @@ $result = $conn->query($sql);
 
             }
 
+
+            .navbar .nav-item {
+
+                margin-bottom: 5px;
+
+            }
+
+
+            .navbar .btn {
+
+                margin-top: 5px;
+
+            }
+
         }
 
     </style>
@@ -363,36 +448,40 @@ $result = $conn->query($sql);
      NAVBAR
 =================================================== -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- ==================================================
+     COMMON NAVBAR
+================================================== -->
 
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
 
     <div class="container">
 
 
-        <!-- LOGO -->
+        <!-- ==================================================
+             LOGO
+        ================================================== -->
 
         <a
-            class="navbar-brand fw-bold"
+            class="navbar-brand fw-bold fs-3"
             href="index.php">
 
-            <i
-                class="bi bi-egg-fried text-warning">
-            </i>
+            <i class="bi bi-egg-fried text-warning"></i>
 
-            Bite<span>Craft</span>
+            Bite<span class="text-warning">Craft</span>
 
         </a>
 
 
-
-        <!-- MOBILE BUTTON -->
+        <!-- ==================================================
+             MOBILE MENU BUTTON
+        ================================================== -->
 
         <button
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#mainNavbar"
-            aria-controls="mainNavbar"
+            data-bs-target="#navbarMenu"
+            aria-controls="navbarMenu"
             aria-expanded="false"
             aria-label="Toggle navigation">
 
@@ -401,19 +490,20 @@ $result = $conn->query($sql);
         </button>
 
 
-
-        <!-- NAVIGATION -->
+        <!-- ==================================================
+             NAVIGATION MENU
+        ================================================== -->
 
         <div
             class="collapse navbar-collapse"
-            id="mainNavbar">
+            id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
 
 
-            <ul
-                class="navbar-nav ms-auto align-items-lg-center">
-
-
-                <!-- HOME -->
+                <!-- ==================================================
+                     HOME
+                ================================================== -->
 
                 <li class="nav-item">
 
@@ -428,13 +518,14 @@ $result = $conn->query($sql);
                 </li>
 
 
-
-                <!-- MENU -->
+                <!-- ==================================================
+                     MENU
+                ================================================== -->
 
                 <li class="nav-item">
 
                     <a
-                        class="nav-link active"
+                        class="nav-link"
                         href="menu.php">
 
                         Menu
@@ -444,8 +535,9 @@ $result = $conn->query($sql);
                 </li>
 
 
-
-                <!-- ABOUT -->
+                <!-- ==================================================
+                     ABOUT
+                ================================================== -->
 
                 <li class="nav-item">
 
@@ -460,8 +552,9 @@ $result = $conn->query($sql);
                 </li>
 
 
-
-                <!-- CONTACT -->
+                <!-- ==================================================
+                     CONTACT
+                ================================================== -->
 
                 <li class="nav-item">
 
@@ -476,20 +569,156 @@ $result = $conn->query($sql);
                 </li>
 
 
+                <!-- ==================================================
+                     LOGGED-IN USER
+                ================================================== -->
 
-                <!-- LOGIN -->
+                <?php if (isset($_SESSION["user_id"])): ?>
+
+
+                    <!-- MY ORDERS -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="my-orders.php">
+
+                            <i class="bi bi-receipt"></i>
+
+                            My Orders
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- ==================================================
+                         ADMIN DASHBOARD
+                    ================================================== -->
+
+                    <?php if (
+                        isset($_SESSION["user_role"]) &&
+                        $_SESSION["user_role"] === "admin"
+                    ): ?>
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link text-danger fw-semibold"
+                                href="admin/index.php">
+
+                                <i class="bi bi-speedometer2"></i>
+
+                                Admin Dashboard
+
+                            </a>
+
+                        </li>
+
+                    <?php endif; ?>
+
+
+                    <!-- ==================================================
+                         USER NAME
+                    ================================================== -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <span class="nav-link">
+
+                            <i class="bi bi-person-circle"></i>
+
+                            <?php
+
+                            echo htmlspecialchars(
+                                $_SESSION["user_name"] ?? "User"
+                            );
+
+                            ?>
+
+                        </span>
+
+                    </li>
+
+
+                    <!-- ==================================================
+                         LOGOUT
+                    ================================================== -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            href="logout.php"
+                            class="btn btn-outline-dark px-3">
+
+                            <i class="bi bi-box-arrow-right"></i>
+
+                            Logout
+
+                        </a>
+
+                    </li>
+
+
+                <?php else: ?>
+
+
+                    <!-- ==================================================
+                         GUEST USER
+                    ================================================== -->
+
+
+                    <!-- LOGIN -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            href="login.php"
+                            class="btn btn-outline-dark px-3">
+
+                            <i class="bi bi-box-arrow-in-right"></i>
+
+                            Login
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- REGISTER -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            href="register.php"
+                            class="btn btn-dark px-3">
+
+                            <i class="bi bi-person-plus"></i>
+
+                            Register
+
+                        </a>
+
+                    </li>
+
+
+                <?php endif; ?>
+
+
+                <!-- ==================================================
+                     BOOK A TABLE
+                ================================================== -->
 
                 <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
 
                     <a
-                        href="login.php"
-                        class="btn btn-warning">
+                        href="reservation.php"
+                        class="btn btn-warning px-4">
 
-                        <i
-                            class="bi bi-person">
-                        </i>
+                        <i class="bi bi-calendar-check"></i>
 
-                        Login
+                        Book a Table
 
                     </a>
 
@@ -498,12 +727,9 @@ $result = $conn->query($sql);
 
             </ul>
 
-
         </div>
 
-
     </div>
-
 
 </nav>
 
@@ -517,6 +743,13 @@ $result = $conn->query($sql);
 
 
     <div class="container">
+
+
+        <span class="badge bg-warning text-dark px-3 py-2 mb-3">
+
+            BITECRAFT MENU
+
+        </span>
 
 
         <h1>
@@ -555,7 +788,14 @@ $result = $conn->query($sql);
         <div class="text-center mb-5">
 
 
-            <h2 class="fw-bold">
+            <span class="text-warning fw-bold">
+
+                OUR FOOD
+
+            </span>
+
+
+            <h2 class="fw-bold mt-2">
 
                 Explore Our Menu
 
@@ -576,7 +816,6 @@ $result = $conn->query($sql);
         <!-- ==================================================
              CHECK MENU ITEMS
         =================================================== -->
-
 
         <?php if ($result && $result->num_rows > 0): ?>
 
@@ -750,15 +989,17 @@ $result = $conn->query($sql);
 
                                     <!-- ORDER -->
 
-<a
-    href="add-to-cart.php?id=<?php echo $item["id"]; ?>"
-    class="btn btn-warning order-btn">
+                                    <a
+                                        href="add-to-cart.php?id=<?php echo $item["id"]; ?>"
+                                        class="btn btn-warning order-btn">
 
-    <i class="bi bi-cart-plus"></i>
 
-    Add to Cart
+                                        <i class="bi bi-cart-plus"></i>
 
-</a>
+                                        Add to Cart
+
+
+                                    </a>
 
 
                                 </div>
@@ -785,7 +1026,6 @@ $result = $conn->query($sql);
             <!-- ==================================================
                  NO MENU ITEMS
             =================================================== -->
-
 
             <div
                 class="empty-menu">
@@ -843,216 +1083,269 @@ $result = $conn->query($sql);
      FOOTER
 =================================================== -->
 
-<footer
-    class="bg-dark text-white py-5">
 
+<!-- ==================================================
+     COMMON FOOTER
+================================================== -->
+
+<footer class="bg-dark text-white py-5">
 
     <div class="container">
 
-
         <div class="row g-4">
 
+            <!-- BRAND -->
+            <div class="col-lg-5">
 
-            <!-- ABOUT -->
+                <h4 class="fw-bold">
 
-            <div class="col-md-4">
+                    <i class="bi bi-egg-fried text-warning"></i>
 
+                    BiteCraft
 
-                <h5 class="fw-bold">
+                </h4>
 
+                <p class="text-white opacity-75">
 
-                    <i
-                        class="bi bi-egg-fried text-warning">
-                    </i>
-
-
-                    Bite<span class="text-warning">
-
-                        Craft
-
-                    </span>
-
-
-                </h5>
-
-
-                <p class="text-secondary">
-
-
-                    Delicious food, quality ingredients,
-                    and unforgettable experiences.
-
+                    Delicious food.
+                    Memorable moments.
 
                 </p>
 
+                <!-- SOCIAL ICONS -->
+
+                <div class="social-icons mt-3">
+
+                    <a
+                        href="#"
+                        class="text-white me-3 text-decoration-none">
+
+                        <i class="bi bi-facebook"></i>
+
+                    </a>
+
+                    <a
+                        href="#"
+                        class="text-white me-3 text-decoration-none">
+
+                        <i class="bi bi-instagram"></i>
+
+                    </a>
+
+                    <a
+                        href="#"
+                        class="text-white text-decoration-none">
+
+                        <i class="bi bi-whatsapp"></i>
+
+                    </a>
+
+                </div>
 
             </div>
-
 
 
             <!-- QUICK LINKS -->
 
-            <div class="col-md-4">
+            <div class="col-lg-3">
 
-
-                <h5 class="fw-bold">
+                <h6 class="fw-bold mb-3">
 
                     Quick Links
 
-                </h5>
+                </h6>
 
 
-                <ul
-                    class="list-unstyled">
+                <a
+                    href="index.php"
+                    class="footer-link">
+
+                    Home
+
+                </a>
 
 
-                    <li class="mb-2">
+                <a
+                    href="menu.php"
+                    class="footer-link">
 
-                        <a
-                            href="index.php"
-                            class="text-secondary text-decoration-none">
+                    Menu
 
-                            Home
-
-                        </a>
-
-                    </li>
+                </a>
 
 
-                    <li class="mb-2">
+                <a
+                    href="about.php"
+                    class="footer-link">
 
-                        <a
-                            href="menu.php"
-                            class="text-secondary text-decoration-none">
+                    About
 
-                            Menu
-
-                        </a>
-
-                    </li>
+                </a>
 
 
-                    <li class="mb-2">
+                <a
+                    href="contact.php"
+                    class="footer-link">
 
-                        <a
-                            href="about.php"
-                            class="text-secondary text-decoration-none">
+                    Contact
 
-                            About
-
-                        </a>
-
-                    </li>
+                </a>
 
 
-                    <li>
+                <?php if (isset($_SESSION["user_id"])): ?>
 
-                        <a
-                            href="contact.php"
-                            class="text-secondary text-decoration-none">
+                    <a
+                        href="my-orders.php"
+                        class="footer-link">
 
-                            Contact
+                        My Orders
 
-                        </a>
+                    </a>
 
-                    </li>
+                <?php endif; ?>
 
 
-                </ul>
+                <?php if (
+                    isset($_SESSION["user_role"]) &&
+                    $_SESSION["user_role"] === "admin"
+                ): ?>
 
+                    <a
+                        href="admin/index.php"
+                        class="footer-link">
+
+                        Admin Dashboard
+
+                    </a>
+
+                <?php endif; ?>
 
             </div>
-
 
 
             <!-- CONTACT -->
 
-            <div class="col-md-4">
+            <div class="col-lg-4">
 
-
-                <h5 class="fw-bold">
+                <h6 class="fw-bold mb-3">
 
                     Contact Us
 
-                </h5>
+                </h6>
 
 
-                <p class="text-secondary mb-2">
+                <p class="text-white opacity-75 mb-2">
 
-
-                    <i
-                        class="bi bi-geo-alt text-warning">
-                    </i>
-
+                    <i class="bi bi-geo-alt text-warning"></i>
 
                     Colombo, Sri Lanka
 
-
                 </p>
 
 
-                <p class="text-secondary mb-2">
+                <p class="text-white opacity-75 mb-2">
 
-
-                    <i
-                        class="bi bi-telephone text-warning">
-                    </i>
-
+                    <i class="bi bi-telephone text-warning"></i>
 
                     +94 77 123 4567
 
+                </p>
+
+
+                <p class="text-white opacity-75 mb-2">
+
+                    <i class="bi bi-envelope text-warning"></i>
+
+                    hello@bitecraft.com
 
                 </p>
 
 
-                <p class="text-secondary">
+                <p class="text-white opacity-75">
 
+                    <i class="bi bi-clock text-warning"></i>
 
-                    <i
-                        class="bi bi-envelope text-warning">
-                    </i>
-
-
-                    info@bitecraft.com
-
+                    Mon - Sun: 9:00 AM - 11:00 PM
 
                 </p>
-
 
             </div>
 
-
         </div>
-
 
 
         <hr class="border-secondary mt-4">
 
 
+        <!-- COPYRIGHT -->
+
         <div class="text-center">
 
-
-            <p
-                class="text-secondary mb-0">
-
+            <p class="text-white opacity-75 mb-0">
 
                 © <?php echo date("Y"); ?>
 
-                BiteCraft.
+                BiteCraft Restaurant.
 
                 All Rights Reserved.
 
-
             </p>
-
 
         </div>
 
-
     </div>
 
-
 </footer>
+
+
+<!-- ==================================================
+     COMMON FOOTER CSS
+================================================== -->
+
+<style>
+
+    .footer-link {
+
+        display: block;
+
+        color: rgba(255, 255, 255, 0.65);
+
+        text-decoration: none;
+
+        margin-bottom: 10px;
+
+        transition: 0.3s;
+
+    }
+
+
+    .footer-link:hover {
+
+        color: #ffc107;
+
+        padding-left: 5px;
+
+    }
+
+
+    .social-icons a {
+
+        font-size: 21px;
+
+        transition: 0.3s;
+
+    }
+
+
+    .social-icons a:hover {
+
+        color: #ffc107 !important;
+
+    }
+
+</style>
+
+
 
 
 

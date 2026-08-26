@@ -114,7 +114,9 @@ body {
 }
 
 .food-image {
+    
     height: 200px;
+    object-fit: cover;
 
     background: #fff3cd;
 
@@ -126,6 +128,7 @@ body {
 
     color: #ffc107;
 }
+
 
 
 /* =================================
