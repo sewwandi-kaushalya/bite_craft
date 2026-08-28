@@ -51,17 +51,18 @@ require_once "config/database.php";
 
         /* HERO */
 
-        .about-hero {
+        /* .about-hero {
 
-            min-height: 430px;
+            min-height: 330px;
 
             background:
                 linear-gradient(
-                    rgba(0,0,0,0.55),
+                    rgba(6, 0, 0, 0.55),
                     rgba(0,0,0,0.55)
                 ),
                 url("./assets/images/about-hero.png")
                 center/cover no-repeat;
+
 
             display: flex;
 
@@ -73,8 +74,46 @@ require_once "config/database.php";
 
         .about-hero h1 {
             font-size: 55px;
+        } */
+
+        .about-header {
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.75),
+                    rgba(0, 0, 0, 0.75)
+                ),
+                url("assets/images/menu-banner.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            padding: 90px 0;
+
+            color: white;
+
+            text-align: center;
+
         }
 
+
+        .about-header h1 {
+
+            font-size: 48px;
+
+            font-weight: bold;
+
+        }
+
+
+        .about-header p {
+
+            color: #ddd;
+
+            font-size: 18px;
+
+        }
 
         /* IMAGE */
 
@@ -83,7 +122,7 @@ require_once "config/database.php";
             min-height: 420px;
 
             background:
-                url("./assets/images/about-restaurant.png")
+                url("./assets/images/about.jpg")
                 center/cover no-repeat;
 
             border-radius: 20px;
@@ -532,13 +571,13 @@ NAVBAR
 HERO
 ================================================== -->
 
-<section class="about-hero">
+<!-- <section class="about-hero">
 
     <div class="container">
 
         <div class="row">
 
-            <div class="col-lg-7">
+            <div class="col-lg-7 ms-auto text-center align-center">
 
                 <span class="badge bg-warning text-dark px-3 py-2 mb-3">
 
@@ -568,9 +607,49 @@ HERO
 
         </div>
 
+        
+
     </div>
 
+</section> -->
+<section class="about-header">
+
+
+    <div class="container">
+
+
+        <span class="badge bg-warning text-dark px-3 py-2 mb-3">
+
+                    ABOUT BITECRAFT
+
+                </span>
+
+
+          <h1 class="fw-bold">
+
+                    Food That Brings
+                    <span class="text-warning"><br>
+
+                        People Together
+
+                    </span>
+
+                </h1>
+
+
+       <p class="lead mt-3">
+
+                    Great food, warm hospitality and
+                    unforgettable moments.
+
+                </p>
+
+
+    </div>
+
+
 </section>
+
 
 
 <!-- ==================================================

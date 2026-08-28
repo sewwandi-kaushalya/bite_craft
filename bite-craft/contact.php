@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         /* HERO */
 
-        .contact-hero {
+        /* .contact-hero {
 
             min-height: 350px;
 
@@ -118,6 +118,44 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         .contact-hero h1 {
 
             font-size: 55px;
+        } */
+.contact-header {
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.75),
+                    rgba(0, 0, 0, 0.75)
+                ),
+                url("assets/images/menu-banner.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            padding: 90px 0;
+
+            color: white;
+
+            text-align: center;
+
+        }
+
+
+        .contact-header h1 {
+
+            font-size: 48px;
+
+            font-weight: bold;
+
+        }
+
+
+        .contact-header p {
+
+            color: #ddd;
+
+            font-size: 18px;
+
         }
 
 
@@ -564,7 +602,7 @@ NAVBAR
 HERO
 ================================================== -->
 
-<section class="contact-hero">
+<!-- <section class="contact-hero">
 
     <div class="container">
 
@@ -587,6 +625,38 @@ HERO
         </p>
 
     </div>
+
+</section> -->
+
+<section class="contact-header">
+
+
+    <div class="container">
+
+
+        <span class="badge bg-warning text-dark px-3 py-2 mb-3">
+
+            GET IN TOUCH
+
+        </span>
+
+
+          <h1 class="fw-bold">
+
+            Contact <span class="text-warning">Us</span>
+
+        </h1>
+
+
+      <p class="lead">
+
+            We'd love to hear from you.
+
+        </p>
+
+
+    </div>
+
 
 </section>
 

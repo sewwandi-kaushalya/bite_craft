@@ -362,7 +362,8 @@ $categories = $conn->query(
         </div>
 
 
-        <a
+<ul>
+       <li class="list-unstyled"> <a
             href="menu.php"
             class="btn btn-outline-dark">
 
@@ -370,8 +371,21 @@ $categories = $conn->query(
 
             Back to Menu
 
-        </a>
+        </a> </li>
 
+        <li class="list-unstyled mt-2">
+            <!-- Dashboard -->
+
+    <a
+        href="index.php"
+        class="btn btn-outline-dark">
+
+        <i class="bi bi-speedometer2"></i>
+
+        <span>Dashboard</span>
+
+    </a></li>
+</ul>
 
     </div>
 

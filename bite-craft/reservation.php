@@ -512,7 +512,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
                     <p
-                        class="text-light-emphasis mb-4">
+                        class=" mb-4" style="color: #cbcbcb;">
 
                         Reserve your table in advance
                         and enjoy delicious food with
@@ -536,7 +536,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </strong>
 
                             <p
-                                class="text-light-emphasis mb-0">
+                                class="mb-0" style="color: #cbcbcb;">
 
                                 Monday - Sunday
 
@@ -566,7 +566,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </strong>
 
                             <p
-                                class="text-light-emphasis mb-0">
+                                class="mb-0" style="color: #cbcbcb;">
 
                                 Colombo, Sri Lanka
 
@@ -592,7 +592,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </strong>
 
                             <p
-                                class="text-light-emphasis mb-0">
+                                class="mb-0" style="color: #cbcbcb;">
 
                                 +94 77 123 4567
 
@@ -619,7 +619,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </strong>
 
                             <p
-                                class="text-light-emphasis mb-0">
+                                class="mb-0" style="color: #cbcbcb;">
 
                                 hello@bitecraft.com
 

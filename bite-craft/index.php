@@ -387,7 +387,7 @@ HERO SECTION
 
                 </div> -->
 
-                <img src="./assets/images/hero_img.png" alt="Hero Image">
+                <img src="./assets/images/hero-image.png" alt="Hero Image">
 
             </div>
 
